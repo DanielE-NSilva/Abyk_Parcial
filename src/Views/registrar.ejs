@@ -1,0 +1,183 @@
+<%- include('partials/_header') -%>
+    <blockquote>
+        <form class="login100-form " action="/registrar" method="POST">
+            <span class="login100-form-title" style="padding-bottom: 10px;">
+                Registrar
+            </span>
+            <div class="wrap-input100 " data-validate="No has seleccionado alguno" style="margin-bottom: 0;">
+
+                <span class="symbol-input100">
+                    <i class="far fa-id-card" aria-hidden="true"></i>
+                </span>
+                <select class="input100" style="background-color: rgb(232, 240, 254)" onChange="mostrar(this.value);"
+                    id="status" name="status">
+                    <option value="Ninguno">Tipo de Usuario</option>
+                    <option value="estudiante">Estudiante</option>
+                    <option value="docente">Docente</option>
+                </select>
+            </div>
+
+
+            <div id="estudiante" class="element" style="display: none;">
+                <blockquote>
+                    <br>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="text" name="nombre" id="Nombre"
+                                placeholder="Ingrese Su Nombre" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="wrap-input100">
+                                <span class="symbol-input100">
+                                    <i class="fas fa-user-edit" aria-hidden="true"></i>
+                                </span>
+                                <div>
+                                    <input class="input100" type="text" name="apellido1" id="Apellido1"
+                                        placeholder="1° Apellido" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="wrap-input100">
+                                <span class="symbol-input100">
+                                    <i class="fas fa-user-edit" aria-hidden="true"></i>
+                                </span>
+                                <div>
+                                    <input class="input100" type="text" name="apellido2" id="Apellido2"
+                                        placeholder="2° Apellido" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-at" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="text" name="apellido2" id="Apellido2"
+                                placeholder="Ingrese Su Correo Institucional" value="">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-id-card-alt" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Ingrese Su Numero De Identificación"
+                                value="">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fab fa-elementor" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Ingrese Su Plan Academico:" value="">
+                        </div>
+                    </div>
+                </blockquote>
+            </div>
+
+            <div id="docente" class="element" style="display: none;">
+                <blockquote>
+                    <br>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="text" name="nombre" id="Nombre"
+                                placeholder="Ingrese Su Nombre Completo">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="text" name="apellido2" id="Apellido2"
+                                placeholder="Ingrese Su Correo Institucional">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-id-card-alt" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <select class="input100" style="background-color: rgb(232, 240, 254)">
+                                <option value="Ninguno">Tipo de Identificación</option>
+                                <option value="CC">Cedula De Ciudadanía </option>
+                                <option value="TI ">Tarjeta De Identidad</option>
+                                <option value="CE">Cedula de Extranjería </option>
+                                <option value="PEP">Permiso especial de permanencia</option>
+                                <option value="PA">Pasaporte</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-id-card-alt" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Numero De Identificación">
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                        </span>
+
+                        <div>
+                            <input class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Ingrese el Codigo de programa">
+                        </div>
+                    </div>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Ingrese el Tipo de docente">
+                        </div>
+                    </div>
+
+                </blockquote>
+            </div>
+
+
+            <div class="form-group" id="registrarB" style="display: none;">
+                <button class="login100-form-btn container-login100-form-btn" id="btn-registrar">
+                    <i class="fa fa-check-circle"></i> Registrar
+                </button>
+            </div>
+
+
+        </form>
+
+    </blockquote>
+
+
+
+
+    </form>
+    </div>
+
+
+    </div>
+
+    <%- include('partials/_footer') -%>

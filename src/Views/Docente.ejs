@@ -1,0 +1,125 @@
+<%- include('partials/_header') -%>
+
+    <blockquote>
+        <form class="login100-form ">
+            <span class="login100-form-title" style="padding-bottom: 0px;">
+                Bienvenido Docente
+            </span>
+            <div id="docente" class="element">
+                <blockquote>
+                    <br>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input readonly="true" class="input100" type="text" name="nombre" id="Nombre"
+                                placeholder="Ingrese Su Nombre Completo" value="<%= data.NombreCompletoDocente %>">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input readonly="true" class="input100" type="text" name="apellido2" id="Apellido2"
+                                placeholder="Ingrese Su Correo Institucional" value="<%= data.EmailDocente %>">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-id-card-alt" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input id="Control" value="<%= data.TipoDeDocumento %>" style="display: none;">
+                            </input>
+
+                            <select disabled="true" id="TipoDeDocumento" class="input100"
+                                style="background-color: rgb(232, 240, 254)">
+                                <option value="Ninguno">Tipo de Identificación</option>
+                                <option value="CC">Cedula De Ciudadanía </option>
+                                <option value="TI">Tarjeta De Identidad</option>
+                                <option value="CE">Cedula de Extranjería </option>
+                                <option value="PEP">Permiso especial de permanencia</option>
+                                <option value="PA">Pasaporte</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-id-card-alt" aria-hidden="true"></i>
+                        </span>
+                        <div>
+                            <input readonly="true" class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Numero De Identificación" value="<%= data.NroDocumentoDocente %>">
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                        </span>
+
+                        <div>
+                            <input readonly="true" class="input100" type="number" name="IDdocument" id="IDdocument"
+                                placeholder="Ingrese el Codigo de programa" value="<%= data.CodPrograma %>">
+                        </div>
+                    </div>
+                    <div class="wrap-input100">
+                        <span class="symbol-input100">
+                            <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                        </span>
+
+                        <div>
+                            <input readonly="true" class="input100" type="text" name="IDdocument" id="IDdocument"
+                                placeholder="Ingrese el Tipo de docentes" value="<%= data.TipoDocente %>">
+                        </div>
+                    </div>
+
+                </blockquote>
+            </div>
+        </form>
+        <div class="row" style="width: 380px;">
+            <form class="col-md-6" action="/antecedentes" method="POST">
+                <div style="display: none">
+                    <input name="IDdocument" value="<%= data.NroDocumentoDocente %>">
+                    <input name="email" value="<%= data.EmailDocente %>">
+                    <input name="TipoDeUsuario" value="docentes">
+                    <input name="Encontrado" value="<%= data.encontrado%>" id="Encontrado">
+                </div>
+                <button class="login100-form-btn container-login100-form-btn" id="btn-Antecedentes">
+                    <i class="fa fa-check-circle"></i> Antecentes
+                </button>
+            </form>
+            <form class="col-md-6" action="/pasaporte" method="POST">
+                <div style="display: none">
+                    <input name="IDdocument" value="<%= data.NroDocumentoDocente %>">
+                    <input name="email" value="<%= data.EmailDocente %>">
+                    <input name="TipoDeUsuario" value="docentes">
+                    <input name="Encontrado" value="<%= data.encontrado%>" id="Encontrado">
+                </div>
+                <button class="login100-form-btn container-login100-form-btn" id="btn-encuesta">
+                    <i class="fa fa-check-circle"></i> Pasaporte
+                </button>
+            </form>
+        </div>
+        <br>
+        <form class="col-md-6" action="/infoFamiliar" method="POST">
+            <div style="display: none">
+                <input name="IDdocument" value="<%= data.NroDocumentoDocente %>">
+                <input name="email" value="<%= data.EmailDocente %>">
+                <input name="TipoDeUsuario" value="docentes">
+                <input name="Encontrado" value="<%= data.encontrado%>" id="Encontrado">
+            </div>
+            <button class="login100-form-btn container-login100-form-btn" id="btn-infofamilia">
+                <i class="fa fa-check-circle"></i> Informacion familiar
+            </button>
+        </form>
+        <script src="/public/js/script.js"></script>
+        <script src="/public/js/Comprobacion.js"></script>
+    </blockquote>
+
+    <%- include('partials/_footer') -%>

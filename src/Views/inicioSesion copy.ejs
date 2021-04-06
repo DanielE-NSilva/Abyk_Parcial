@@ -1,0 +1,87 @@
+<%- include('partials/_header') -%>
+
+  <form class="login100-form" method="POST" action="/Bienvenido">
+    <span class="login100-form-title">
+      Ingreso al formulario
+    </span>
+
+    <div class="wrap-input100">
+      <span class="symbol-input100">
+        <i class="fa fa-at" aria-hidden="true"></i>
+      </span>
+      <div class="row">
+        <div class="col-sm-10">
+          <input class="input100" type="text" name="email" id="email" placeholder="Ingrese su documento">
+        </div>
+        <div class="col-sm-2">
+          <span id="ValidoEmail" style="display: none; padding-top: 5px;">
+            <i class="fas fa-check-circle fa-2x" style="color: #57b846" aria-hidden="true"></i>
+          </span>
+          <span id="ErroneoEmail" style="display: none; padding-top: 5px;">
+            <i class="fas fa-times-circle fa-2x" style="color: brown" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap-input100">
+      <span class="symbol-input100">
+        <i class="fas fa-id-card-alt" aria-hidden="true"></i>
+      </span>
+      <div class="row">
+        <div class="col-sm-10">
+          <input class="input100" type="text" name="IDdocumento" id="IDdocument" placeholder="Ingrese su documento">
+        </div>
+        <div class="col-sm-2">
+          <span id="ValidoID" style="display: none; padding-top: 5px;">
+            <i class="fas fa-check-circle fa-2x" style="color: #57b846" aria-hidden="true"></i>
+          </span>
+          <span id="ErroneoID" style="display: none; padding-top: 5px;">
+            <i class="fas fa-times-circle fa-2x" style="color: brown" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-10">
+        <div class="wrap-input100">
+          <span class="symbol-input100">
+            <i class="far fa-id-card" aria-hidden="true"></i>
+          </span>
+
+          <select disabled class="input100 " style="background-color: rgb(232, 240, 254)" name="TipoDeUsuario"
+            id="TiposDeUsuario" required>
+            <option value="Ninguno">Tipo De Usuario</option>
+            <option value="estudiantes">Estudiante</option>
+            <option value="docentes">Docente</option>
+          </select>
+          <div class="col-sm-2"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-10">
+      <a href="/registrar">No tienes cuenta aun? registrate aqui</a>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+
+    <div class="row">
+      <div class="col-sm-10">
+        <div class="form-group">
+          <button disabled style="background-color: brown;" class="login100-form-btn container-login100-form-btn"
+            id="btn-inicioSesion">
+            <i class="fa fa-check-circle"></i> Validar
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+  </form>
+
+  <script src="../public/js/Validaciones.js">
+  </script>
+
+  <%- include('partials/_footer') -%>

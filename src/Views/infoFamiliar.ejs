@@ -1,0 +1,232 @@
+<%- include('partials/_header') -%>
+  <div class="container mt-5">
+
+    <form action="/add" method="POST">
+      <h3>Datos familiares</h3> <br>
+      <div style="display: none">
+        <input name="NroDocumento" value="<%= data.NroDocumento %>">
+      </div>
+      <blockquote>
+        <div class="wrap-input100 validate-input" data-validate="No has seleccionado alguno">
+          <span class="symbol-input100">
+            <i class="fas fa-user-edit" aria-hidden="true"></i>
+          </span>
+          <select class="input100" style="background-color: rgb(232, 240, 254)" onChange="TipoEstudioF(this.value);"
+            id="status" name="Parentesco">
+            <option value="Ninguno">Seleccione Parentesco</option>
+            <option value="Esposo"> Esposo o Espasa</option>
+            <option value="Madre"> Madre o Padre</option>
+            <option value="Hijo">Hijo</option>
+          </select>
+        </div>
+
+        <!--  MOSTRAR TIPO DE ESTUDIO -->
+
+        <div id="TipoEstudio" class="element" style="display: none;">
+          <blockquote>
+            <div class="wrap-input100 validate-input" data-validate="No has seleccionado alguno">
+              <span class="symbol-input100">
+                <i class="fas fa-graduation-cap"></i>
+              </span>
+              <select class="input100" style="background-color: rgb(232, 240, 254)" name="TipoEstudio"><br>
+                <option value="No aplica">Modo de estudio</option>
+                <option value="Casa">Casa</option>
+                <option value="Alternancia">Alternancia</option>
+              </select>
+            </div>
+          </blockquote>
+        </div>
+      </blockquote>
+
+      <div class="wrap-input100">
+        <span class="symbol-input100">
+          <i class="fas fa-venus-mars" aria-hidden="true"></i>
+        </span>
+        <div>
+          <input class="input100" type="text" name="Genero" class="form-control" autofocus placeholder="Genero">
+        </div>
+      </div>
+
+      <div class="wrap-input100">
+        <span class="symbol-input100">
+          <i class="far fa-calendar-alt"></i>
+        </span>
+        <div>
+          <input class="input100" type="text" name="fechaNacimiento" class="form-control" autofocus
+            placeholder="Ingrese fecha de nacimiento">
+        </div>
+      </div>
+
+      <div class="wrap-input100">
+        <span class="symbol-input100">
+          <i class="fas fa-user-edit"></i>
+        </span>
+        <div>
+          <input class="input100" type="text" name="Nombre" class="form-control" autofocus
+            placeholder="Ingrese nombre completo">
+        </div>
+      </div>
+      
+        <div class="row">
+          <center>
+          <div class="col-md-8">
+            <div class="wrap-input100">
+              <button class="login100-form-btn container-login100-form-btn" id="btn-registrarFamilia">
+                <i class="fa fa-check-circle"></i> Agregar Familiar
+              </button>
+            </div>
+          </div>
+        </center>
+        </div>
+      
+    </form>
+  </div>
+
+  </div>
+
+
+  <form action="/infoFamiliar/Guardar" method="POST">
+    <div class="row">
+      <div class="col-md-12 mb-3" >
+        <table class="table table-bordered table-hover">
+          <h3>Datos familiares agregados</h3>
+          <thead>
+            <tr>
+              <td style="background-color: #e7f5a7;"> n°</td>
+              <td style="background-color: #e7f5a7;"> Parentesco</td>
+              <td style="background-color: #e7f5a7;"> Nombre</td>
+              <td style="background-color: #e7f5a7;" class="TDFechaNac"> Fecha de nacimiento</td>
+              <td style="background-color: #e7f5a7;"> Genero</td>
+              <td style="background-color: #e7f5a7;" colspan="3">Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (data) { %>
+              <% for(var i=0; i < data.length; i++) { %>
+                <tr>
+                  <td>
+                    <input disabled type="text" value="<%= (i + 1) %>" name="" class="TDNumero">
+                  </td>
+                  <td>
+                    <input disabled type="text" value="<%= data[i].parentesco%>" name="Parentesco" class="TDParentesco">
+                  </td>
+                  <td>
+                    <input disabled type="text" value="<%= data[i].Nombre %>" name="Nombre" class="TDNombre">
+                  </td>
+                  <td>
+                    <input disabled type="text" value="<%= data[i].fechaNacimiento %>" name="fechaNacimiento"
+                      class="TDFechaNac">
+                  </td>
+                  <td>
+                    <input disasbled type="text" value="<%= data[i].Genero %>" name="Genero" class="TDGenero">
+                  </td>
+                  <td><a href="/update/<%= data[i].Id %>" class="btn btn-info"> <i class="fas fa-user-edit"></i></a>
+                  </td>
+                  <td><a href="/delete/<%= data[i].Id %>" class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+                <% } %>
+                  <% } %>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <div class="wrap-input100">
+        <h3>Informacion personal</h3>
+      </div>
+      <div class="wrap-input100">
+        <span class="symbol-input100">
+          <i class="far fa-futbol"></i>
+        </span>
+        <div>
+          <textarea class="textareaD" style="padding-left: 60px;" cols="45" rows="3"
+            placeholder="¿Que deportes practicas?" required></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="wrap-input100">
+            <span class="symbol-input100">
+              <i class="fas fa-mail-bulk" aria-hidden="true"></i>
+            </span>
+            <div>
+              <textarea class="textareaD" style="padding-left: 60px;" cols="45" rows="1" placeholder="código postal"
+                required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="wrap-input100 validate-input">
+            <span class="symbol-input100">
+              <i class="fas fa-globe-americas"></i>
+            </span>
+            <select class="input100" style="background-color: rgb(232, 240, 254)" name="pais" required><br>
+              <option value="">Seleccione pais </option>
+              <option value="Colombia">Colombia </option>
+              <option value="Brasil">Brasil </option>
+              <option value="Venezuela">Venezuela </option>
+              <option value="Perú">Perú </option>
+              <option value="Panama">Panama </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="wrap-input100 validate-input">
+            <span class="symbol-input100">
+              <i class="fas fa-building"></i>
+            </span>
+            <select class="input100" style="background-color: rgb(232, 240, 254)" name="Ciudad"><br>
+              <option value="NN">Seleccione departamento/ciudad </option>
+              <option value="Ciudad"> Amazonas: Leticia</option>
+              <option value="Ciudad"> Antioquía: Medellín</option>
+              <option value="Ciudad"> Arauca: Arauca</option>
+              <option value="Ciudad"> Atlántico: Barranquilla</option>
+              <option value="Ciudad"> Bolívar: Cartagena de Indias</option>
+              <option value="Ciudad"> Boyacá: Tunja</option>
+              <option value="Ciudad"> Caldas: Manizales</option>
+              <option value="Ciudad"> Caquetá: Florencia</option>
+              <option value="Ciudad"> Casanare: Yopal</option>
+              <option value="Ciudad"> Cauca: Popayán</option>
+              <option value="Ciudad"> Cesar: Valledupar</option>
+              <option value="Ciudad"> Chocó: Quibdó</option>
+              <option value="Ciudad"> Córdoba: Montería</option>
+              <option value="Ciudad"> Cundinamarca: Bogotá</option>
+              <option value="Ciudad"> Guainía: Inírida
+              <option value="Ciudad"> Guaviare: San José del Guaviare</option>
+              <option value="Ciudad"> Huila: Neiva</option>
+              <option value="Ciudad"> La Guajira: Riohacha</option>
+              <option value="Ciudad"> Magdalena: Santa Marta</option>
+              <option value="Ciudad"> Meta: Villavicencio</option>
+              <option value="Ciudad"> Nariño: San Juan de Pasto</option>
+              <option value="Ciudad"> Norte de Santander: San José de Cúcuta</option>
+              <option value="Ciudad"> Putumayo: Mocoa</option>
+              <option value="Ciudad"> Quindío: Armenia</option>
+              <option value="Ciudad"> Risaralda: Pereira</option>
+              <option value="Ciudad"> San Andrés y Providencia: San Andrés</option>
+              <option value="Ciudad"> Santander: Bucaramanga</option>
+              <option value="Ciudad"> Sucre: Sincelejo</option>
+              <option value="Ciudad"> Tolima: Ibagué</option>
+              <option value="Ciudad"> Valle del Cauca: Cali</option>
+              <option value="Ciudad"> Vaupés: Mitú</option>
+              <option value="Ciudad"> Vichada: Puerto Carreño</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <center>
+          <div class="col-md-5">
+            <button class="login100-form-btn container-login100-form-btn" id="btn-registrarAll">
+              <i class="fa fa-check-circle"></i> Guardar Informacion
+            </button>
+          </div>
+        </center>
+      </div>
+    </div>
+  </form>
+
+
+  <%- include('partials/_footer') -%>
