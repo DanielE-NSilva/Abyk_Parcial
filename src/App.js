@@ -38,9 +38,11 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 // CONEXION A MONGODB
-const config = require("./server/config");
+
+//const config = require("./server/config");
+
 //database
-require ('./server/database');
+//require ('./server/database');
 
 // Starting the server
 app.listen(app.get("port"), () => {

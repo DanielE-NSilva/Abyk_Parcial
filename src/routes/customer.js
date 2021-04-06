@@ -1,7 +1,8 @@
 const express = require('express');
-const controller = require('../controllers/Controller');
 const router = express.Router();
 const Controller = require('../controllers/Controller')
+
+
 
 router.get('/', Controller.IniciarSesion);
 router.post('/Bienvenido', Controller.Bienvenido);
@@ -17,12 +18,11 @@ router.post('/antecedentes/Guardar', Controller.antecedentesGuardar);
 router.post('/pasaporte', Controller.pasaporte);
 router.post('/pasaporte/Guardar', Controller.pasaporteGuardar);
 
-
-router.post('/infoFamiliar/Guardar',controller.infoFamiliarGuardar)
+router.post('/infoFamiliar/Guardar',Controller.infoFamiliarGuardar)
 
 // PRUEBA INFORMACION FAMILIAR
 
-router.get('/infoFamiliar/:NroDocumento', controller.infoFamilia);
+router.get('/infoFamiliar/:NroDocumento', Controller.infoFamilia);
 
 router.post('/add',Controller.save);
 router.get('/delete/:id',Controller.delete); //METODO
