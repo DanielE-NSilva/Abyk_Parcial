@@ -1,8 +1,17 @@
 
-
+Node 
 
 npm init --yes
 
 npm i mysql morgan handlebars express-myconnection express-handlebars express errorhandler ejs @handlebars/allow-prototype-access
 
 npm i nodemon -D
+
+Estructura
+md src
+
+cd src
+md controllers, public, routes, server, Views
+
+cd public 
+md css, image, js

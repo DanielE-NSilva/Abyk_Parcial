@@ -20,9 +20,9 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
     host: 'localhost',
     user: 'root',
-    password: 'Constraseña de su mysql',
+    password: 'ConstraseñaDeSuMysql',
     port: 3306,
-    database: 'ingresocovid'
+    database: 'NombreBaseDeDatos'
 }, 'single'));
     //Entender lo que escriban en las vistas
 app.use(express.urlencoded({extended: false}));
@@ -34,8 +34,6 @@ app.use('/', customerRoutes);
 
 // static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
-
 
 // CONEXION A MONGODB
 
