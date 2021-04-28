@@ -479,10 +479,6 @@ padding-bottom:10%!important;
 
 
 
-
-
-
-
 .contenedorcitoD{
   background:white!important;
   padding-bottom:4%!important;
@@ -527,8 +523,56 @@ display: block;
 
 
 
+/*CABECERA*/
 
-
+.inner_main_menu {
+  margin: 0 auto;
+  width: 1170px;
+}
+.inner_main_menu ul {
+  margin: 0;
+  padding: 80px 0 0;
+  list-style: none;
+  text-align: right;
+}
+.inner_main_menu ul li {
+  float: none;
+  display: inline-block;
+}
+.inner_main_menu ul li:nth-child(1) {
+  float: left;
+}
+.inner_main_menu ul li:nth-child(2) {
+  float: left;
+}
+.inner_main_menu ul li:nth-child(3) {
+  float: left;
+}
+.inner_main_menu ul li a {
+  color: #262626;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  font-family: 'Oswald', sans-serif;
+}
+.inner_main_menu ul li a:hover {
+  color: pink;
+}
+#main_menu  {
+  width: 100%;
+  position: relative;
+}
+.logo_area {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  content: "";
+  margin-left: -150px;
+}
 
 
 
