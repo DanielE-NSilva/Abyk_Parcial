@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Controller = require('../controllers/Controller')
 
-router.get('/', Controller.IniciarSesion);
+
+router.get('/', Controller.index);
 router.post('/Bienvenido', Controller.Bienvenido);
+
+//router.get('/inicioSesion', Controller.IniciarSesion);
+//router.post('/inicioSesion', Controller.Bienvenido);
 
 router.get('/registrar', Controller.registrar);
 //router.post('/registrar', Controller.registrarG);

@@ -5,9 +5,13 @@ const { Pasaporte } = require('../model');
 //Crear un objeto
 const controller = {};
 
-controller.IniciarSesion = (req, res) => {
-  res.render('inicioSesion');
+controller.index = (req, res) => {
+  res.render('index');
 };
+
+//controller.IniciarSesion = (req, res) => {
+ // res.render('inicioSesion');
+//};
 
 //Funciones para utilizacion en la respuesta de antecedentes
 function EstudiantesConsulta(datos, connection, res) {
