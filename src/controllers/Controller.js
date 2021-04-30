@@ -1,4 +1,4 @@
-/** 
+/**
 const { Antecedentes } = require('../model');
 const { Pasaporte } = require('../model');
 */
@@ -10,7 +10,7 @@ controller.login = (req, res) => {
 };
 
 //controller.IniciarSesion = (req, res) => {
- // res.render('inicioSesion');
+ //res.render('inicioSesion');
 //};
 
 //Funciones para utilizacion en la respuesta de antecedentes
@@ -18,7 +18,7 @@ function EstudiantesConsulta(datos, connection, res) {
   const query = connection.query('SELECT * FROM estudiantes where NroDocumentoEstudiante = ? AND EmailEstudiante= ? ;',
     datos[0], async (err, Persona) => {
       if (Persona[0] == undefined) {
-        // ver como dar respuesta con calidad
+        //Ver como dar respuesta con calidad
         res.redirect('/');
 
       } else {
@@ -49,7 +49,7 @@ function DocentesConsulta(datos, connection, res) {
         }
 
         res.render('Docente', { data: Persona[0] });
-
+        
       }
     });
 }
@@ -85,13 +85,13 @@ controller.antecedentes = (req, res) => {
   datos.TipoDeUsuario = req.body.TipoDeUsuario;
   datos.NroDocumento = req.body.IDdocumento;
   datos.EmailEstudiante = req.body.email;
-  res.render('Antecedentes', { data: datos });  // 
+  res.render('Antecedentes', { data: datos });
 };
 
 controller.pasaporte = async (req, res) => {
   const datos = {};
   datos.NroDocumento = req.body.IDdocument;
-  res.render('Pasaporte', { data: datos });  // 
+  res.render('Pasaporte', { data: datos });
 };
 
 controller.antecedentesGuardar = async (req, res) => {
@@ -155,15 +155,15 @@ function InfoFamiliar(data, conn, res) {
     familia.NroDocumento = data.NroDocumento;
 
     res.render('infoFamiliar', {
-      data: familia   // LLENAR LOS DATOS DENTRO DE familia
+      data: familia //Llenar los datos dentro de familia
     });
   });
 }
 
-//CRUD INFORMACION FAMILIAR
-controller.infoFamilia = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
+//CRUD informacion familiar
+controller.infoFamilia = (req, res) => { //Funcion nombre del metodo .list
   const data = req.params;
-  req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
+  req.getConnection((err, conn) => { //Poder conectarse a MySQL
     InfoFamiliar(data, conn, res);
   });
 };
@@ -172,8 +172,8 @@ controller.infoFamiliarGuardar = (req, res) => {
   console.log(req.body);
 }
 
-controller.save = (req, res) => { //FUNCION PARA SALVAR 
-  const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
+controller.save = (req, res) => { //Funcion para guardar
+  const data = req.body; //Data que contiene los datos del Form
 
   data.NroDocumento = parseInt(data.NroDocumento, 10);
   req.getConnection(async (err, connection) => {

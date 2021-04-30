@@ -1,4 +1,4 @@
-CREATE SCHEMA `ingresocovid` ;
+CREATE SCHEMA `ingresocovid`;
 
 use `ingresocovid` ;
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Empleados(
     FOREIGN KEY (AreaFacultad)
         REFERENCES AreaFacultad (CodFacultad) MATCH SIMPLE
 );
-	
+
 CREATE TABLE IF NOT EXISTS Docentes(
     NroDocumentoDocentes NUMERIC(14,0) NOT NULL,
     TipoDeDocumento VARCHAR(2) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Estudiantes(
 
 CREATE TABLE IF NOT EXISTS Familia(
 	Id INT4 AUTO_INCREMENT PRIMARY KEY,
-    NroDocumento NUMERIC(14)  NOT NULL,	
+    NroDocumento NUMERIC(14)  NOT NULL,
     parentesco VARCHAR(50) NOT NULL,
     Nombre VARCHAR(100) NOT NULL,
     fechaNacimiento VARCHAR (15),
@@ -93,10 +93,10 @@ INSERT INTO AreaFacultad
 	('DIN','Directorio Investigación'),
 	('CLP','Coordinación Centro de Laboratorios, Prácticas y Experimentación'),
 	('DVP','Docentes Vinculado o Provicionales');
-	
+
 INSERT INTO Programa
 	(CodPrograma, NombrePrograma, CodFacultad)
-	VALUES 
+	VALUES
 	(1749,'Tecnólogo en costos y auditoría','ADM'),
 	(101952,'Tecnólogo en Gestión Aeroportuaria','ADM'),
 	(103880,'Tecnólogo en Gestión de Empresas y Destinos Turísticos','ADM'),
@@ -176,7 +176,7 @@ INSERT INTO PlanAcademico
 
 INSERT INTO Empleados
 	(NroDocumentoEmpleado, NombreCompletoEmpleado, AreaFacultad, CargoEmpleado, EmailEmpleado)
-	VALUES 
+	VALUES
 (7665821773,'Luz Miram Isaza Cifuentes','AGH','Auxiliar De Servicios Asistenciales','lmisaza@elpoli.edu.co'),
 (3531000305,'Jaime Leon Acevedo Vergara','ADM','Tecnico Administrativo','jlacevedo@elpoli.edu.co'),
 (2082664233,'AURA MARCELA MESA','AGH','Auxiliar Administrativo Asistente administrativo','ammesa@elpoli.edu.co'),
