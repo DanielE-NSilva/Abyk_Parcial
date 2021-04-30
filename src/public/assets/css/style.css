@@ -11852,7 +11852,7 @@ input:focus {
 
 /* line 1943, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
 .login_part .login_part_text, .login_part .login_part_form {
-  padding: 80px 70px;
+  padding: 10px 70px;
   height: 600px;
   display: table;
 }

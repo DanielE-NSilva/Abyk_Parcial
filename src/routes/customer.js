@@ -3,7 +3,7 @@ const router = express.Router();
 const Controller = require('../controllers/Controller')
 
 
-router.get('/', Controller.index);
+router.get('/', Controller.login);
 router.post('/Bienvenido', Controller.Bienvenido);
 
 //router.get('/inicioSesion', Controller.IniciarSesion);

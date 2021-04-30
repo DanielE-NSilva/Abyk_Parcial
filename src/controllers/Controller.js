@@ -5,8 +5,8 @@ const { Pasaporte } = require('../model');
 //Crear un objeto
 const controller = {};
 
-controller.index = (req, res) => {
-  res.render('index');
+controller.login = (req, res) => {
+  res.render('login');
 };
 
 //controller.IniciarSesion = (req, res) => {
