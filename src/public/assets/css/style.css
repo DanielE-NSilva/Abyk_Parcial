@@ -3405,6 +3405,7 @@ input:focus {
 /* line 3, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
 .header-area .header-top {
   padding: 13px 170px;
+  background: pink;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
