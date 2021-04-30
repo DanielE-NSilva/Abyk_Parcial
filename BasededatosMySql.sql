@@ -1,4 +1,4 @@
-drop database abyk;
+DROP DATABASE abyk;
 
 CREATE DATABASE Abyk;
 USE abyk;

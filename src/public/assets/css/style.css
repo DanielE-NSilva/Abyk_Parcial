@@ -2696,47 +2696,47 @@ input:focus::-moz-placeholder {
 
 /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .section-padding30 {
-  padding-top: 200px;
-  padding-bottom: 170px;
+  padding-top: 100px;
+  padding-bottom: 85px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 200px;
-    padding-bottom: 170px;
+    padding-top: 100px;
+    padding-bottom: 85px;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 150px;
-    padding-bottom: 120px;
+    padding-top: 750px;
+    padding-bottom: 60px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 100px;
-    padding-bottom: 70px;
+    padding-top: 50px;
+    padding-bottom: 35px;
   }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 60px;
-    padding-bottom: 28px;
+    padding-top: 30px;
+    padding-bottom: 14px;
   }
 }
 
 @media (max-width: 767px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 60px;
-    padding-bottom: 28px;
+    padding-top: 30px;
+    padding-bottom: 14px;
   }
 }
 
@@ -2977,34 +2977,34 @@ input:focus {
 
 /* line 936, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .section_padding {
-  padding: 100px 0px;
+  padding: 50px 0px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 936, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section_padding {
-    padding: 100px 0px;
+    padding: 50px 0px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 936, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section_padding {
-    padding: 70px 0px;
+    padding: 35px 0px;
   }
 }
 
 @media (max-width: 576px) {
   /* line 936, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section_padding {
-    padding: 70px 0px;
+    padding: 35px 0px;
   }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   /* line 936, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section_padding {
-    padding: 70px 0px;
+    padding: 35px 0px;
   }
 }
 
@@ -3937,6 +3937,8 @@ input:focus {
 /* line 34, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_h1-hero.scss */
 .slider-area {
   margin-top: -1px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 /* line 36, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_h1-hero.scss */
@@ -11853,7 +11855,7 @@ input:focus {
 /* line 1943, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
 .login_part .login_part_text, .login_part .login_part_form {
   padding: 10px 70px;
-  height: 600px;
+  height: 300px;
   display: table;
 }
 
@@ -11861,7 +11863,7 @@ input:focus {
   /* line 1943, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
   .login_part .login_part_text, .login_part .login_part_form {
     padding: 30px;
-    height: 400px;
+    height: 300px;
   }
 }
 
@@ -11869,7 +11871,7 @@ input:focus {
   /* line 1943, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
   .login_part .login_part_text, .login_part .login_part_form {
     padding: 20px;
-    height: 400px;
+    height: 300px;
   }
 }
 
@@ -11881,9 +11883,8 @@ input:focus {
 
 /* line 1960, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
 .login_part .login_part_text {
-  background-image: -moz-linear-gradient(90deg, #B08EAD 0%, #4B3049 64%, #B08EAD 100%);
-  background-image: -webkit-linear-gradient(90deg, #B08EAD 0%, #4B3049 64%, #B08EAD 100%);
-  background-image: linear-gradient(90deg, #B08EAD 0%, #4B3049 64%, #B08EAD 100%);
+  background-color: #888;
+  opacity: 90%;
   background-size: 200% auto;
 }
 

@@ -1,12 +1,12 @@
-/** 
-const { Antecedentes } = require('../model');
-const { Pasaporte } = require('../model');
-*/
 //Crear un objeto
 const controller = {};
 
 controller.index = (req, res) => {
   res.render('index');
+};
+
+controller.indexPruebas = (req, res) => {
+  res.render('indexDePrueba');
 };
 
 controller.login = (req, res) => {
@@ -17,23 +17,23 @@ controller.registrarse = (req, res) => {
   res.render('registrarse');
  };
 
+ controller.Logeado = (req, res) => {
+  
+
+  res.render('login');
+ };
+
 //Funciones para utilizacion en la respuesta de antecedentes
 function EstudiantesConsulta(datos, connection, res) {
   const query = connection.query('SELECT * FROM estudiantes where NroDocumentoEstudiante = ? AND EmailEstudiante= ? ;',
     datos[0], async (err, Persona) => {
       if (Persona[0] == undefined) {
         // ver como dar respuesta con calidad
+        
         res.redirect('/');
 
       } else {
 
-        const encontrado = await Antecedentes.find({ NroDocumento: datos[0][0] }).countDocuments();
-        if (encontrado >= 1) {
-          Persona[0].encontrado = 'Si';
-          Persona[0].Antecedentes = encontrado;
-        } else {
-          Persona[0].encontrado = 'No';
-        }
         res.render('Estudiante', { data: Persona[0] });
       }
     });
