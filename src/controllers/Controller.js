@@ -6,7 +6,7 @@ const { Pasaporte } = require('../model');
 const controller = {};
 
 controller.index = (req, res) => {
-  res.render('indexDePrueba');
+  res.render('index');
 };
 
 controller.login = (req, res) => {
