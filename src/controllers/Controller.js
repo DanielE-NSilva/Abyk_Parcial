@@ -13,6 +13,10 @@ controller.login = (req, res) => {
  res.render('login');
 };
 
+controller.registrarse = (req, res) => {
+  res.render('registrarse');
+ };
+
 //Funciones para utilizacion en la respuesta de antecedentes
 function EstudiantesConsulta(datos, connection, res) {
   const query = connection.query('SELECT * FROM estudiantes where NroDocumentoEstudiante = ? AND EmailEstudiante= ? ;',
