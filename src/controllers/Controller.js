@@ -9,9 +9,9 @@ controller.index = (req, res) => {
   res.render('index');
 };
 
-//controller.IniciarSesion = (req, res) => {
- // res.render('inicioSesion');
-//};
+controller.login = (req, res) => {
+ res.render('login');
+};
 
 //Funciones para utilizacion en la respuesta de antecedentes
 function EstudiantesConsulta(datos, connection, res) {

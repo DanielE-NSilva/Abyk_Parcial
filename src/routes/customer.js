@@ -6,11 +6,13 @@ const Controller = require('../controllers/Controller')
 router.get('/', Controller.index);
 router.post('/Bienvenido', Controller.Bienvenido);
 
+
+router.get('/login', Controller.login);
+
 //router.get('/inicioSesion', Controller.IniciarSesion);
 //router.post('/inicioSesion', Controller.Bienvenido);
 
-router.get('/registrar', Controller.registrar);
-//router.post('/registrar', Controller.registrarG);
+
 
 router.post('/antecedentes', Controller.antecedentes);
 router.post('/antecedentes/Guardar', Controller.antecedentesGuardar);
