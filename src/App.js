@@ -20,9 +20,9 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
     host: 'localhost',
     user: 'root',
-    password: 'killerzton',
+    password: 'VRC_D3NS_M3GU5T45',
     port: 3306,
-    database: 'NombreBaseDeDatos'
+    database: 'abyk'
 }, 'single'));
     //Entender lo que escriban en las vistas
 app.use(express.urlencoded({extended: false}));
