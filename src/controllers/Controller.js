@@ -43,6 +43,10 @@ controller.seccionHombre = (req, res) => {
   res.render('seccionHombre');
 };
 
+//Quienes Somos
+controller.quienesSomos = (req, res) => {
+  res.render('quienesSomos');
+};
 
 
 

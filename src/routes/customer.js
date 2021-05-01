@@ -23,6 +23,9 @@ router.post('/registrandose', Controller.registrandose);
 //Logueado
 router.get('/carrito', Controller.carrito);
 
+router.get('/quienesSomos', Controller.quienesSomos);
+
+
 
 
 router.post('/antecedentes', Controller.antecedentes);
