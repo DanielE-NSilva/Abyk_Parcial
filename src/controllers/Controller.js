@@ -73,14 +73,18 @@ function DatosRegistroConsulta(datosRegistroO, connection, res) {
       if (Persona[0] == undefined) {
         console.log("No estas en la base de datos");
         var DatoPersona =[datosRegistroO[2],datosRegistroO[3],datosRegistroO[2],datosRegistroO[0],datosRegistroO[1]];
-        const query2 = connection.query('INSERT INTO persona (Correo,Contraseña) Values (?,?);',
+        var query2 = connection.query('INSERT INTO persona (Correo,Contraseña) Values (?,?);',
         DatoPersona, async (err, Persona) => {
-          console.log(query2);
+          if(err) throw err;
+          query2 = connection.query('INSERT INTO cliente (Correo, Nombre, Apellido) Values (?,?,?);',
+            DatoPersona, async (err, Persona) => {
+              if(err) throw err;
+            });
         });
+        
         var Registrado = [];
         Registrado.Registrado = "Agregando en la base de datos";
         res.render('registrarse', { data: Registrado });
-
 
       } else {
         //FALTA QUE RENDERICE DONDE DEBE SER
