@@ -1,47 +1,85 @@
 //Crear un objeto
 const controller = {};
 
-controller.carrito = (req, res) => {
-  res.render('carrito');
+// Sin Loguearse
+//Inicio
+controller.index = (req, res) => {
+  res.render('index');
 };
-
-controller.seccionHombre = (req, res) => {
-  res.render('seccionHombre');
-};
-
+// Pruebas solamente con cabezado y pie de pagina
 controller.indexPruebas = (req, res) => {
   res.render('indexDePrueba');
 };
 
+//Login
 controller.login = (req, res) => {
- res.render('login');
+  var Persona = [];
+  Persona.Registrado = null;
+  res.render('login', { data: Persona });
 };
 
+controller.Logeado = (req, res) => {
+  const DatosLogin = [req.body.Correo, req.body.password];
+  req.getConnection((err, connection) => {
+    console.log("Dentro ");
+    DatosLoginConsulta(DatosLogin, connection, res);
+  });
+};
+//Registrar
 controller.registrarse = (req, res) => {
   res.render('registrarse');
- };
+};
+controller.registrandose = (req, res) => {
+  res.render('registrarse');
+};
 
- controller.Logeado = (req, res) => {
-  
+//Carrito
+controller.carrito = (req, res) => {
+  res.render('carrito');
+};
 
-  res.render('login');
- };
+//Seccion Hombre
+controller.seccionHombre = (req, res) => {
+  res.render('seccionHombre');
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Funciones para utilizacion en la respuesta de antecedentes
-function EstudiantesConsulta(datos, connection, res) {
-  const query = connection.query('SELECT * FROM estudiantes where NroDocumentoEstudiante = ? AND EmailEstudiante= ? ;',
-    datos[0], async (err, Persona) => {
+function DatosLoginConsulta(datosLogin, connection, res) {
+  const query = connection.query('SELECT * FROM persona WHERE Correo = ? AND Contraseña= ? ;',
+    datosLogin, async (err, Persona) => {
       if (Persona[0] == undefined) {
-        // ver como dar respuesta con calidad
-        
-        res.redirect('/');
-
+        console.log("Usuario y Constraseña Incorrecta");
+        var Registrado = [];
+        Registrado.Registrado = "Usuario o Constraseña Incorrecta";
+        res.render('login', { data: Registrado });
       } else {
-
-        res.render('Estudiante', { data: Persona[0] });
+        //FALTA QUE RENDERICE DONDE DEBE SER
+        console.log("Usuario y Constraseña Correcta");
+        res.render('login');
       }
     });
 }
+
+
+
+//Funciones y controladores anteriores 
+
 
 function DocentesConsulta(datos, connection, res) {
   const query = connection.query('SELECT * FROM docentes where NroDocumentoDocente = ? AND EmailDocente= ? ;',

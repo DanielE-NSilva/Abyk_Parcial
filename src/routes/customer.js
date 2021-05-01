@@ -3,16 +3,25 @@ const router = express.Router();
 const Controller = require('../controllers/Controller')
 
 
-router.get('/', Controller.seccionHombre);
-router.post('/Bienvenido', Controller.Bienvenido);
+// Sin Loguearse
+//Inicio
+router.get('/', Controller.index);
+router.get('/Pruebas', Controller.indexPruebas);
 
 
+
+//Login
 router.get('/login', Controller.login);
+router.post('/login', Controller.Logeado);
+//Registrar
 router.get('/registrarse', Controller.registrarse);
-router.get('/carrito', Controller.carrito);
+router.post('/registrandose', Controller.registrandose);
 
 //router.get('/inicioSesion', Controller.IniciarSesion);
 //router.post('/inicioSesion', Controller.Bienvenido);
+
+//Logueado
+router.get('/carrito', Controller.carrito);
 
 
 
