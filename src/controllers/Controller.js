@@ -21,7 +21,7 @@ controller.login = (req, res) => {
 controller.Logeado = (req, res) => {
   const DatosLogin = [req.body.Correo, req.body.password];
   req.getConnection((err, connection) => {
-    console.log("Dentro ");
+    console.log("Dentro");
     DatosLoginConsulta(DatosLogin, connection, res);
   });
 };
@@ -29,7 +29,11 @@ controller.Logeado = (req, res) => {
 controller.registrarse = (req, res) => {
   res.render('registrarse');
 };
+
 controller.registrandose = (req, res) => {
+  console.log(req.body);
+
+
   res.render('registrarse');
 };
 
