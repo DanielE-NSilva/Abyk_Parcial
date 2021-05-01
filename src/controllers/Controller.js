@@ -1,6 +1,10 @@
 //Crear un objeto
 const controller = {};
 
+controller.carrito = (req, res) => {
+  res.render('carrito');
+};
+
 controller.seccionHombre = (req, res) => {
   res.render('seccionHombre');
 };

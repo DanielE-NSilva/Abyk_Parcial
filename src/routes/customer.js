@@ -9,6 +9,7 @@ router.post('/Bienvenido', Controller.Bienvenido);
 
 router.get('/login', Controller.login);
 router.get('/registrarse', Controller.registrarse);
+router.get('/carrito', Controller.carrito);
 
 //router.get('/inicioSesion', Controller.IniciarSesion);
 //router.post('/inicioSesion', Controller.Bienvenido);
