@@ -19,7 +19,7 @@ controller.login = (req, res) => {
 };
 
 controller.Logeado = (req, res) => {
-  const DatosLogin = [req.body.Correo, req.body.password];
+  var DatosLogin = [req.body.Correo, req.body.password];
   req.getConnection((err, connection) => {
     console.log("Dentro");
     DatosLoginConsulta(DatosLogin, connection, res);
@@ -27,14 +27,24 @@ controller.Logeado = (req, res) => {
 };
 //Registrar
 controller.registrarse = (req, res) => {
-  res.render('registrarse');
+  var Persona = [];
+  Persona.Registrado = null;
+  res.render('registrarse', { data: Persona });
 };
 
 controller.registrandose = (req, res) => {
   console.log(req.body);
-
-
-  res.render('registrarse');
+  if(req.body.password == req.body.Confirmpassword){
+    var DatosRegistro = [req.body.Nombre, req.body.Apellido, req.body.Correo, req.body.password];
+    req.getConnection((err, connection) => {
+      console.log("Dentro");
+      DatosRegistroConsulta(DatosRegistro, connection, res);
+    });
+  }else{
+    var Registrado = [];
+    Registrado.Registrado = "Constraseña Incorrectas";
+    res.render('registrarse',{ data: Registrado });
+  }
 };
 
 //Carrito
@@ -56,20 +66,37 @@ controller.quienesSomos = (req, res) => {
 
 
 
+function DatosRegistroConsulta(datosRegistroO, connection, res) {
+  var datosRegistro=[datosRegistroO[2]]
+  const query = connection.query('SELECT * FROM persona WHERE Correo = ?;',
+  datosRegistro, async (err, Persona) => {
+      if (Persona[0] == undefined) {
+        console.log("No estas en la base de datos");
+        var DatoPersona =[datosRegistroO[2],datosRegistroO[3],datosRegistroO[2],datosRegistroO[0],datosRegistroO[1]];
+        const query2 = connection.query('INSERT INTO persona (Correo,Contraseña) Values (?,?);',
+        DatoPersona, async (err, Persona) => {
+          console.log(query2);
+        });
+        var Registrado = [];
+        Registrado.Registrado = "Agregando en la base de datos";
+        res.render('registrarse', { data: Registrado });
 
 
-
-
-
-
-
-
+      } else {
+        //FALTA QUE RENDERICE DONDE DEBE SER
+        console.log("Estas en la base de datos");
+        var Registrado = [];
+        Registrado.Registrado = "Estas en la base de datos";
+        res.render('registrarse', { data: Registrado });
+      }
+    });
+}
 
 
 
 //Funciones para utilizacion en la respuesta de antecedentes
 function DatosLoginConsulta(datosLogin, connection, res) {
-  const query = connection.query('SELECT * FROM persona WHERE Correo = ? AND Contraseña= ? ;',
+  const query = connection.query('SELECT * FROM persona WHERE Correo = ? AND Contraseña= ? ',
     datosLogin, async (err, Persona) => {
       if (Persona[0] == undefined) {
         console.log("Usuario y Constraseña Incorrecta");
