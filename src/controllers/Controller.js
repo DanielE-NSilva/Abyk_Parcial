@@ -1,8 +1,8 @@
 //Crear un objeto
 const controller = {};
 
-controller.index = (req, res) => {
-  res.render('index');
+controller.seccionHombre = (req, res) => {
+  res.render('seccionHombre');
 };
 
 controller.indexPruebas = (req, res) => {
