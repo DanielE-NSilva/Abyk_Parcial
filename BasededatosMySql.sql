@@ -51,7 +51,7 @@ INSERT INTO persona (Correo, Constraseña, Perfil) VALUES
 ("leta55y_g629m@klepf.com","g629m", 0);
 
 INSERT INTO administrador (Correo, Nombre, Apellido) VALUES
-("leta55y_g529m@klepf.com","leta55y", "g529m"),
+("leta55y_g529m@klepf.com","leta55y", "g529m");
 
 INSERT INTO cliente (Correo, Nombre, Apellido) VALUES
 ("leta55y_g629m@klepf.com","leta55y", "g629m");
