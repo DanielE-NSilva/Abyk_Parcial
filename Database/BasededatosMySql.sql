@@ -26,7 +26,7 @@ CREATE TABLE cliente(
 	Correo VARCHAR(45) NOT NULL,
 	Nombre VARCHAR(45) NOT NULL,
 	Apellido VARCHAR(45) NOT NULL,
-	Telefono INT NOT NULL,
+	Telefono INT NULL,
 	PRIMARY KEY (IdCliente),
     FOREIGN KEY (Correo) REFERENCES persona(Correo),
 	UNIQUE INDEX IdCliente_UNIQUE (IdCliente ASC) VISIBLE
