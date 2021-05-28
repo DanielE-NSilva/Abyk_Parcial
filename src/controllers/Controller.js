@@ -62,6 +62,21 @@ controller.quienesSomos = (req, res) => {
   res.render('quienesSomos');
 };
 
+//Crud productos
+controller.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
+  req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
+    conn.query('SELECT * FROM producto', (err, productos) => {
+     if (err) {
+      res.json(err);
+     }
+     res.render('producto', {  // PINTAR EN EL NAVEGADOR 
+        data: productos  // LLENAR LOS DATOS DENTRO DE CUSTOMER
+     });
+    });
+  });
+};
+
+
 
 
 

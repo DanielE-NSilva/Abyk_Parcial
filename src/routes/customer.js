@@ -23,6 +23,10 @@ router.post('/registrarse', Controller.registrandose);
 router.get('/carrito', Controller.carrito);
 
 
+//Crud productos
+router.get
+
+
 
 
 module.exports = router;
