@@ -69,12 +69,54 @@ controller.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
      if (err) {
       res.json(err);
      }
-     res.render('producto', {  // PINTAR EN EL NAVEGADOR 
+     res.render('productos_edit', {  // PINTAR EN EL NAVEGADOR 
         data: productos  // LLENAR LOS DATOS DENTRO DE CUSTOMER
      });
     });
   });
 };
+
+
+controller.save = (req, res) => { //FUNCION PRA SALVAR 
+  const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
+  console.log(req.body)
+  req.getConnection((err, connection) => {
+    const query = connection.query('INSERT INTO customer set ?', data, (err, customer) => {
+      console.log(customer)
+      res.redirect('/');
+    })
+  })
+};
+controller.edit = (req, res) => {
+  const { id } = req.params;
+  req.getConnection((err, conn) => {
+    conn.query("SELECT * FROM customer WHERE id = ?", [id], (err, rows) => {
+      res.render('productos_edit', {
+        data: rows[0]
+      })
+    });
+  });
+};
+
+controller.update = (req, res) => {
+  const { id } = req.params;
+  const newCustomer = req.body;
+  req.getConnection((err, conn) => {
+
+  conn.query('UPDATE customer set ? where id = ?', [newCustomer, id], (err, rows) => {
+    res.redirect('/');
+  });
+  });
+};
+
+controller.delete = (req, res) => {
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+    connection.query('DELETE FROM customer WHERE id = ?', [id], (err, rows) => {
+      res.redirect('/');
+    });
+  });
+}
 
 
 
@@ -129,6 +171,8 @@ function DatosLoginConsulta(datosLogin, connection, res) {
       }
     });
 }
+
+
 
 
 

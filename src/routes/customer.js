@@ -24,7 +24,8 @@ router.get('/carrito', Controller.carrito);
 
 
 //Crud productos
-router.get
+router.get('/productos',Controller.list); //METODO
+
 
 
 
