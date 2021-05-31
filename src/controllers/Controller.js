@@ -65,12 +65,12 @@ controller.quienesSomos = (req, res) => {
 //Crud productos
 controller.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
   req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
-    conn.query('SELECT * FROM producto', (err, productos) => {
+    conn.query('SELECT * FROM producto', (err, producto) => {
      if (err) {
       res.json(err);
      }
-     res.render('productos_edit', {  // PINTAR EN EL NAVEGADOR 
-        data: productos  // LLENAR LOS DATOS DENTRO DE CUSTOMER
+     res.render('productos', {  // PINTAR EN EL NAVEGADOR 
+        data: producto // LLENAR LOS DATOS DENTRO DE PRODUCTO
      });
     });
   });
@@ -81,9 +81,9 @@ controller.save = (req, res) => { //FUNCION PRA SALVAR
   const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
   console.log(req.body)
   req.getConnection((err, connection) => {
-    const query = connection.query('INSERT INTO customer set ?', data, (err, customer) => {
-      console.log(customer)
-      res.redirect('/');
+    const query = connection.query('INSERT INTO producto set ?', data, (err, producto) => {
+      console.log(producto)
+      res.redirect('productos');
     })
   })
 };
@@ -100,10 +100,10 @@ controller.edit = (req, res) => {
 
 controller.update = (req, res) => {
   const { id } = req.params;
-  const newCustomer = req.body;
+  const newProducto = req.body;
   req.getConnection((err, conn) => {
 
-  conn.query('UPDATE customer set ? where id = ?', [newCustomer, id], (err, rows) => {
+  conn.query('UPDATE customer set ? where id = ?', [newProducto, id], (err, rows) => {
     res.redirect('/');
   });
   });
@@ -112,7 +112,7 @@ controller.update = (req, res) => {
 controller.delete = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    connection.query('DELETE FROM customer WHERE id = ?', [id], (err, rows) => {
+    connection.query('DELETE FROM producto WHERE id = ?', [id], (err, rows) => {
       res.redirect('/');
     });
   });
