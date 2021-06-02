@@ -113,9 +113,9 @@ controller.save = (req, res) => { //FUNCION PRA SALVAR
 };
 
 controller.edit = (req, res) => {
-  const { id } = req.params;
+  const { IdProducto} = req.params;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM producto WHERE id = ?", [id], (err, rows) => {
+    conn.query("SELECT * FROM producto WHERE IdProducto= ?", [IdProducto], (err, rows) => {
       res.render('productos_edit', {
         data: rows[0]
       })
@@ -141,7 +141,7 @@ controller.delete = (req, res) => {
     const query = connection.query('SELECT IdProducto FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
       const data = rows[0];
       connection.query('DELETE FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
-      res.redirect('productos');
+      res.redirect('/productos/' + data.IdProducto);
       });
     });
   });
