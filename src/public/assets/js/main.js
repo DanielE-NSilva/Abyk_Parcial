@@ -9,6 +9,18 @@
       });
     });
 
+    var map = L.map('mapa').setView([6.171612, -75.610169], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+   
+    L.marker([6.171612, -75.610169]).addTo(map)
+        .bindPopup('ABYK Accesorios')
+        .openPopup();
+   
+     
+
 
 /* 2. slick Nav */
 // mobile_menu
