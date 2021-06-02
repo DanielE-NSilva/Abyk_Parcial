@@ -8,6 +8,7 @@ const Controller = require('../controllers/Controller')
 router.get('/', Controller.index);
 router.get('/Pruebas', Controller.indexPruebas);
 router.get('/quienesSomos', Controller.quienesSomos);
+router.get('/contactos', Controller.contactos);
 
 
 //Login

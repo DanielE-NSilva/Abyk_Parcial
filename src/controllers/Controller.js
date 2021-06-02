@@ -78,31 +78,31 @@ controller.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
   });
 };
 
-controller.save = (req, res) => { //FUNCION PRA SALVAR 
-  const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
-  console.log(req.body)
-  req.getConnection((err, connection) => {
-       connection.query('INSERT INTO producto set ?', data, (err, producto) => {
-      console.log(producto)
-      res.send("sii")
-      // res.redirect('productos');
-    })
-  })
-};
-
 // controller.save = (req, res) => { //FUNCION PRA SALVAR 
-//   var DatosProductos = [req.body.nameproducto, req.body.name, req.body.descripcion, req.body.caracteristicas,req.body.referencia,req.body.cantidad,req.body.categoria];
 //   const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
-//   console.log(DatosProductos);
 //   console.log(req.body)
-  
 //   req.getConnection((err, connection) => {
-//     const query = connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,categoria) value (?,?,?,?,?,?,?)', DatosProductos, (err, producto) => {
+//        connection.query('INSERT INTO producto set ?', data, (err, producto) => {
 //       console.log(producto)
-//       res.redirect('productos');
+//       //res.send("sii")
+//        res.redirect('index');
 //     })
 //   })
 // };
+
+controller.save = (req, res) => { //FUNCION PRA SALVAR 
+  var DatosProductos = [req.body.nameproducto, req.body.name, req.body.descripcion, req.body.caracteristicas,req.body.referencia,req.body.cantidad,req.body.categoria];
+  const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
+  console.log(DatosProductos);
+  console.log(req.body)
+  
+  req.getConnection((err, connection) => {
+    const query = connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,categoria) value (?,?,?,?,?,?,?)', DatosProductos, (err, producto) => {
+      console.log(producto)
+      res.redirect('productos');
+    })
+  })
+};
 controller.edit = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, conn) => {
@@ -133,6 +133,11 @@ controller.delete = (req, res) => {
     });
   });
 }
+
+//Contactenos
+controller.contactos = (req, res) => {
+  res.render('contactos');
+};
 
 
 
