@@ -27,7 +27,9 @@ router.get('/carrito', Controller.carrito);
 //Crud productos
 router.get('/productos',Controller.list); //METODO
 router.post('/add',Controller.save);
-
+router.get('/delete/:id',Controller.delete); //METODO
+router.post('/update/:id',Controller.update);
+router.get('/update/:id',Controller.edit);
 
 
 

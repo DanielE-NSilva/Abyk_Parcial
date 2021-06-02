@@ -62,6 +62,11 @@ controller.quienesSomos = (req, res) => {
   res.render('quienesSomos');
 };
 
+//Contactenos
+controller.contactos = (req, res) => {
+  res.render('contactos');
+};
+
 //Crud productos
 controller.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
   req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
@@ -90,23 +95,27 @@ controller.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
 //   })
 // };
 
+
+//ALMACENAR LOS DATOA EN LA BD 
 controller.save = (req, res) => { //FUNCION PRA SALVAR 
-  var DatosProductos = [req.body.nameproducto, req.body.name, req.body.descripcion, req.body.caracteristicas,req.body.referencia,req.body.cantidad,req.body.categoria];
-  const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
-  console.log(DatosProductos);
+  var data = [req.body.nameproducto, req.body.name, req.body.descripcion, req.body.caracteristicas,req.body.referencia,req.body.cantidad,req.body.categoria];
+ 
+  // const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
+  console.log(data);
   console.log(req.body)
   
   req.getConnection((err, connection) => {
-    const query = connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,categoria) value (?,?,?,?,?,?,?)', DatosProductos, (err, producto) => {
+    const query = connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,categoria) value (?,?,?,?,?,?,?)', data, (err, producto) => {
       console.log(producto)
       res.redirect('productos');
     })
   })
 };
+
 controller.edit = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM customer WHERE id = ?", [id], (err, rows) => {
+    conn.query("SELECT * FROM producto WHERE id = ?", [id], (err, rows) => {
       res.render('productos_edit', {
         data: rows[0]
       })
@@ -134,10 +143,7 @@ controller.delete = (req, res) => {
   });
 }
 
-//Contactenos
-controller.contactos = (req, res) => {
-  res.render('contactos');
-};
+
 
 
 
