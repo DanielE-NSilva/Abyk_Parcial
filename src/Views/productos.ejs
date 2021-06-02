@@ -1,6 +1,6 @@
 <%- include('partials/_header') -%>
 
-<pre><%= data[0].IdProducto %></pre>
+<pre><%= data[0].NombreImagen %></pre>
 
 
 <div class="container mt-5">
@@ -26,13 +26,13 @@
               <% for(var i = 0; i < data.length; i++) { %>
                 <tr>
                   <td><%= (i + 1) %></td>
-                  <td><%= data[i].nameproducto %></td>
-                  <td><%= data[i].name %></td>
-                  <td><%= data[i].descripcion %></td>
-                  <td><%= data[i].caracteristicas %></td>
-                  <td><%= data[i].referencia %></td>
-                  <td><%= data[i].cantidad %></td>
-                  <td><%= data[i].categoria %></td>
+                  <td><%= data[i].NombreImagen %></td>
+                  <td><%= data[i].Nombre %></td>
+                  <td><%= data[i].Descripcion %></td>
+                  <td><%= data[i].Caracteristicas %></td>
+                  <td><%= data[i].Referencia %></td>
+                  <td><%= data[i].Cantidad %></td>
+                  <td><%= data[i].Categoria %></td>
                   <td>
                     <a href="/update/<%= data[i].id %>" class="btn btn-info">Edit</a>
                     <a href="/delete/<%= data[i].id %>" class="btn btn-danger">Delete</a>
