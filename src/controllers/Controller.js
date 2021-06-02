@@ -123,6 +123,31 @@ controller.edit = (req, res) => {
   });
 };
 
+// controller.delete = (req, res) => {
+//   const { IdProducto } = req.params;
+//   req.getConnection((err, connection) => {
+//     connection.query('DELETE FROM producto WHERE id = ?', [IdProducto], (err, rows) => {
+//       res.redirect('productos');
+//     });
+//   });
+// }
+
+
+controller.delete = (req, res) => {
+  const { IdProducto } = req.params;
+
+
+  req.getConnection((err, connection) => {
+    const query = connection.query('SELECT IdProducto FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
+      const data = rows[0];
+      connection.query('DELETE FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
+      res.redirect('productos');
+      });
+    });
+  });
+}
+
+
 controller.update = (req, res) => {
   const { id } = req.params;
   const newProducto = req.body;
@@ -134,14 +159,14 @@ controller.update = (req, res) => {
   });
 };
 
-controller.delete = (req, res) => {
-  const { id } = req.params;
-  req.getConnection((err, connection) => {
-    connection.query('DELETE FROM producto WHERE id = ?', [id], (err, rows) => {
-      res.redirect('/');
-    });
-  });
-}
+// controller.delete = (req, res) => {
+//   const { id } = req.params;
+//   req.getConnection((err, connection) => {
+//     connection.query('DELETE FROM producto WHERE id = ?', [id], (err, rows) => {
+//       res.redirect('/');
+//     });
+//   });
+// }
 
 
 
