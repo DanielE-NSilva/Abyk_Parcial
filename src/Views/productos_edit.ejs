@@ -1,34 +1,35 @@
 
 <%- include('partials/_header') -%>
+
+
 <div class="container mt-5">
     <div class="row">
       <div class="col-md-5 offset-md-3 card">
         <div class="card-body">
-          <form action="/update/<%= data.IdProducto %>" method="POST">
+          <form action="/update/<%= data.IdProducto %>" method="POST" >
             <div class="form-group">
-              <input type="text" name="name" value="<%= data.nameproducto%>" placeholder="NombreImagen" class="form-control" autofocus>
+              <input type="text" name="nameproducto" placeholder="NombreProducto" value="<%= data.NombreImagen %>" class="form-control" autofocus>
             </div>
             <div class="form-group">
-              <input type="text" name="address" value="<%= data.name%>" placeholder="Nombre" class="form-control">
+              <input type="text" name="name" placeholder="name"  value="<%= data.Nombre %>" class="form-control">
             </div>
             <div class="form-group">
-              <input type="text" name="phone" value="<%= data.descripcion%>" placeholder="Descripcion" class="form-control">
+              <input type="text" name="descripcion" placeholder="Descripcion"  value="<%= data.Descripcion %>" class="form-control">
             </div>
-              <div class="form-group">
-                <input type="text" name="phone" value="<%= data.caracteristicas%>" placeholder="Caracteristicas" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="text" name="phone" value="<%= data.referencia%>" placeholder="Referencia" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="text" name="phone" value="<%= data.cantidad%>" placeholder="Cantidad" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="text" name="phone" value="<%= data.categoria%>" placeholder="Categoria" class="form-control">
-              </div>
-  
+            <div class="form-group">
+              <input type="text" name="caracteristicas" placeholder="Caracteristicas" value="<%= data.Caracteristicas %>"   class="form-control" autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="referencia" placeholder="Referencia" value="<%= data.Referencia %>"  class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" name="cantidad" placeholder="Cantidad" value="<%= data.Cantidad %>"  class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" name="categoria" placeholder="Categoria" value="<%= data.Categoria %>"  class="form-control" autofocus>
+            </div>
             <button type="submit" class="btn btn-primary">
-              Edit products
+              edit Products
             </button>
           </form>
         </div>

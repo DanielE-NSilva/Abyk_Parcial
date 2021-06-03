@@ -113,30 +113,33 @@ controller.save = (req, res) => { //FUNCION PRA SALVAR
 };
 
 controller.edit = (req, res) => {
-  const { IdProducto} = req.params;
+  const { IdProducto } = req.params;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM producto WHERE IdProducto= ?", [IdProducto], (err, rows) => {
+    conn.query('SELECT * FROM producto WHERE IdProducto = ?', [IdProducto], (err, producto) => {
+
       res.render('productos_edit', {
-        data: rows[0]
+        data: producto[0]
+      
       })
+      
     });
   });
 };
 
-// controller.delete = (req, res) => {
-//   const { IdProducto } = req.params;
-//   req.getConnection((err, connection) => {
-//     connection.query('DELETE FROM producto WHERE id = ?', [IdProducto], (err, rows) => {
-//       res.redirect('productos');
-//     });
-//   });
-// }
+controller.update = (req, res) => {
+  const { IdProducto } = req.params;
+  const newProducto = req.body;
+  req.getConnection((err, conn) => {
+
+  conn.query('UPDATE customer set ? where IdProducto = ?', [newProducto, IdProducto], (err, rows) => {
+    res.redirect('productos', + newProducto.IdProducto);
+   });
+  });
+};
 
 
 controller.delete = (req, res) => {
   const { IdProducto } = req.params;
-
-
   req.getConnection((err, connection) => {
     const query = connection.query('SELECT IdProducto FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
       const data = rows[0];
@@ -148,16 +151,7 @@ controller.delete = (req, res) => {
 }
 
 
-controller.update = (req, res) => {
-  const { id } = req.params;
-  const newProducto = req.body;
-  req.getConnection((err, conn) => {
 
-  conn.query('UPDATE customer set ? where id = ?', [newProducto, id], (err, rows) => {
-    res.redirect('/');
-  });
-  });
-};
 
 // controller.delete = (req, res) => {
 //   const { id } = req.params;
