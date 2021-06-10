@@ -1,5 +1,7 @@
 const Cproductos = {};
 
+const { randomNumber } = require('../helpers/libs');
+
 Cproductos.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
     req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
         conn.query('SELECT * FROM producto', (err, productos) => {
@@ -16,17 +18,38 @@ Cproductos.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
 };
 
 Cproductos.SaveProducto = (req, res) => { //FUNCION PRA SALVAR 
-    var data = [req.body.nameproducto, req.body.name, req.body.descripcion, req.body.caracteristicas, req.body.referencia, req.body.cantidad, req.body.categoria];
+    const saveImage = async () => {
+        const imgUrl = randomNumber();
+        await req.getConnection((err, connection)  => {
+            const query = connection.query('SELECT * FROM  producto WHERE nombreImagen = ? ', imgUrl, (err, producto) => {
+                if (producto.length >= 1)
+                    saveImage()
+                else {
+                    const imageTempPath = req.file.path;
+                    const ext = path.extname(req.file.originalname).toLowerCase();
+                    // 1 es categoria de mujer
+                    if (req.body.categoria == 1)
+                        var targetPath = path.resolve(`src/public/Mujer/${imgUrl}${ext}`);
+                    else
+                        var targetPath = path.resolve(`src/public/Hombre/${imgUrl}${ext}`);
 
-    // const data = req.body; // DATA CONTIENE LOS DATOS DEL FORM
-    console.log(data);
-    console.log(req.body)
-
-    req.getConnection((err, connection) => {
-        const query = connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,categoria) value (?,?,?,?,?,?,?)', data, (err, producto) => {
-            res.redirect('productos');
+                    if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
+                        fs.rename(imageTempPath, targetPath);
+                        var data = [imgUrl, req.body.name, req.body.descripcion, req.body.caracteristicas, req.body.referencia, req.body.cantidad, req.body.categoria];
+                        req.getConnection((err, connection) => {
+                            const query = connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,categoria) value (?,?,?,?,?,?,?)', data, (err, producto) => {
+                                res.redirect('productos');
+                            })
+                        });
+                    } else {
+                        fs.unlink(imageTempPath);
+                        res.status(500).json({ error: "solo imagenes estan permitidas" })
+                    }
+                }
+            })
         })
-    })
+    }
+    saveImage();
 };
 
 Cproductos.edit = (req, res) => {

@@ -5,7 +5,14 @@ const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 
 
+
 const app = express();
+/*
+var multer = require('multer');
+app.use(express.static("public"));
+app.post("/updateImage/add",multer({ dest: './public/uploads/'}).single('img') ,contentUpdate.addImage);
+*/
+
 
 // Importando rutas
 const customerRoutes = require('./routes/customer');
