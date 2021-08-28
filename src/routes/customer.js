@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-
 const Clogin = require('../controllers/CLogin');
 const CInicio = require('../controllers/CInicio');
 const Ccarrito = require('../controllers/Ccarrito');
 const Cproductos = require('../controllers/Cproductos');
-
+const CResgistro = require('../controllers/CRegistro');
 
 
 //Inicio
@@ -15,7 +14,7 @@ router.get('/quienesSomos', CInicio.quienesSomos);
 router.get('/contactos', CInicio.contactos);
 //Registrar
 router.get('/registrarse', CInicio.registrarse);
-router.post('/registrarse', CInicio.registrandose);
+router.post('/registrarse', CResgistro.registrandose);
 
 //Login
 router.get('/login', Clogin.login);

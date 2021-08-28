@@ -5,7 +5,7 @@ USE abyk;
 
 CREATE TABLE persona(
   Correo VARCHAR(45) NOT NULL,
-  Constraseña VARCHAR(45) NOT NULL,
+  Contraseña VARCHAR(65) NOT NULL,
   Perfil TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (Correo),
   UNIQUE INDEX Correo_UNIQUE (Correo ASC) VISIBLE
@@ -46,7 +46,7 @@ CREATE TABLE producto(
 );
 
 -- Insert --
-INSERT INTO persona (Correo, Constraseña, Perfil) VALUES
+INSERT INTO persona (Correo, Contraseña, Perfil) VALUES
 ("leta55y_g529m@klepf.com","g529m", 1),
 ("leta55y_g629m@klepf.com","g629m", 0);
 

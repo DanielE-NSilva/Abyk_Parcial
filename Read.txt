@@ -4,7 +4,7 @@ Node
 npm init --yes
 
 npm i mysql morgan handlebars express-myconnection express-handlebars express errorhandler ejs @handlebars/allow-prototype-access
-
+npm i bcryptjs -S
 npm i nodemon -D
 
 Estructura
