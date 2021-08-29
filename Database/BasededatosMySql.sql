@@ -44,14 +44,3 @@ CREATE TABLE producto(
 	PRIMARY KEY (IdProducto),
 	UNIQUE INDEX IdProducto_UNIQUE (IdProducto ASC) VISIBLE
 );
-
--- Insert --
-INSERT INTO persona (Correo, Contraseña, Perfil) VALUES
-("leta55y_g529m@klepf.com","g529m", 1),
-("leta55y_g629m@klepf.com","g629m", 0);
-
-INSERT INTO administrador (Correo, Nombre, Apellido) VALUES
-("leta55y_g529m@klepf.com","leta55y", "g529m");
-
-INSERT INTO cliente (Correo, Nombre, Apellido) VALUES
-("leta55y_g629m@klepf.com","leta55y", "g629m");

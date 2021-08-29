@@ -31,6 +31,7 @@ app.use(myConnection(mysql, {
     port: 3306,
     database: 'abyk'
 }, 'single'));
+
     //Entender lo que escriban en las vistas
 app.use(express.urlencoded({extended: false}));
 
