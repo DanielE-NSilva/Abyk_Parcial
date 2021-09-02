@@ -1,35 +1,59 @@
 const CRegistro = {};
-const {encrypt, compare} = require('../helpers/handleBcrypt')
-const DRegisto = require('../helpers/DLogin')
-CRegistro.registrandose = async (req, res) => {
-    console.log(req.body);
-    if (req.body.password == req.body.Confirmpassword) {
-      var DatosRegistroPersona = [req.body.Correo, await encrypt(req.body.password)]
-      var DatosRegistroCliente = [req.body.Correo, req.body.Nombre, req.body.Apellido];
-      req.getConnection((err, connection) => {
-        console.log("Dentro");
-        const queryUno = connection.query('INSERT INTO persona(Correo,Contraseña) value (?,?)', DatosRegistroPersona, (err, res) => {
-          if(err != null){
-            console.log("Variable err")
-            console.log(err.sqlMessage)
-            
-          }else{
-            DRegisto.IngresandoDato(req.body.Nombre,req.body.Apellido)
-            console.log("Variable res")
-            console.log(res);
-            const queryDos = connection.query('INSERT INTO cliente(Correo,Nombre,Apellido) value (?,?,?)', DatosRegistroCliente, (err, connection) => {
-              console.log("Correcto Guardo en Cliente");
-            });
+const { encrypt, compare } = require('../helpers/handleBcrypt')
+const DatosRegisto = require('../helpers/Ddb')
+
+CRegistro.registrandose = async (req, respagina) => {
+  var Datos = [];
+  if (req.body.password == req.body.Confirmpassword) {
+    var DatosRegistroPersona = [req.body.Correo, await encrypt(req.body.password)]
+    var DatosRegistroCliente = [req.body.Correo, req.body.Nombre, req.body.Apellido];
+    req.getConnection((err, connection) => {
+      connection.query('INSERT INTO persona(Correo,Contraseña) value (?,?)', DatosRegistroPersona, (err, res) => {
+        if (err) {
+          Datos.Alert = {
+            alert: true,
+            alertTitle: 'Registro de Cliente',
+            alerMessage: 'Correo electronico Registrado ',
+            alertIcon: 'error',
+            showConfirmButton: false,
+            time: 5000,
+            ruta: '/registrarse',
+            Script: 'script'
           }
-        });
-        res.status(201).send('Usuario creado Correctamente');
-        res.render("/")
+          respagina.render('registrarse', { data: Datos })
+        } else {
+          connection.query('INSERT INTO cliente(Correo,Nombre,Apellido) value (?,?,?)', DatosRegistroCliente, (err, connection) => {
+            if (err)
+              console.error(err)
+            else
+              Datos.Alert = {
+                alert: true,
+                alertTitle: 'Registro de Cliente',
+                alerMessage: 'Satisfactorio Registro',
+                alertIcon: 'success',
+                showConfirmButton: false,
+                time: 5000,
+                ruta: '/login',
+                Script: 'script'
+              }
+            respagina.render('registrarse', { data: Datos })
+          });
+        }
       });
-    } else {
-      var Registrado = [];
-      Registrado.Registrado = "Constraseña Incorrectas";
-      res.render('registrarse', { data: Registrado });
+    });
+  } else {
+    Datos.Alert = {
+      alert: true,
+      alertTitle: 'Registro de Cliente',
+      alerMessage: 'Constraseña de Confirmacion erronea ',
+      alertIcon: 'error',
+      showConfirmButton: false,
+      time: 5000,
+      ruta: '/registrarse',
+      Script: 'script'
     }
-  };
-  
-  module.exports = CRegistro;
+    respagina.render('registrarse', { data: Datos })
+  }
+};
+
+module.exports = CRegistro;

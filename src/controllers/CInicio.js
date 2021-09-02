@@ -1,27 +1,54 @@
 const CInicio = {};
-const {encrypt, compare} = require('../helpers/handleBcrypt')
+const { encrypt, compare } = require('../helpers/handleBcrypt')
 
+
+var Datos = []
 //index
 CInicio.index = (req, res) => {
-  res.render('index');
+  Datos.Alert = []
+  console.log(req.user)
+  if (req.user){
+    Datos.Usuario = {user:true, Nombre: req.user.Nombre,perfil:req.user.Perfil}
+  } else
+    Datos.Usuario = {user:false}
+  console.log(Datos)
+  res.render('index', { data: Datos });
 };
 
 //Contactenos
 CInicio.contactos = (req, res) => {
-  res.render('contactos');
+  Datos.Alert = []
+  console.log(req.user)
+  if (req.user){
+    Datos.Usuario = {user:true, Nombre: req.user.Nombre,perfil:req.user.Perfil}
+  } else
+    Datos.Usuario = {user:false}
+  console.log(Datos)
+  res.render('contactos', { data: Datos });
 };
 
 //Quienes Somos
 CInicio.quienesSomos = (req, res) => {
-  res.render('quienesSomos');
+  Datos.Alert = []
+  console.log(req.user)
+  if (req.user){
+    Datos.Usuario = {user:true, Nombre: req.user.Nombre,perfil:req.user.Perfil}
+  } else
+    Datos.Usuario = {user:false}
+  console.log(Datos)
+  res.render('quienesSomos', { data: Datos });
 };
 
 //Registrar
 CInicio.registrarse = (req, res) => {
-  var Persona = [];
-  Persona.Registrado = null;
-  res.render('registrarse', { data: Persona });
+  Datos.Alert = []
+  console.log(req.user)
+  if (req.user){
+    Datos.Usuario = {user:true, Nombre: req.user.Nombre,perfil:req.user.Perfil}
+  } else
+    Datos.Usuario = {user:false}
+  console.log(Datos)
+  res.render('registrarse', { data: Datos });
 };
-
 
 module.exports = CInicio;

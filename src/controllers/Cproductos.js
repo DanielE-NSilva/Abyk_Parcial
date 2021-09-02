@@ -1,16 +1,26 @@
 const Cproductos = {};
-
 const { randomNumber } = require('../helpers/libs');
+
 
 Cproductos.list = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
     req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
         conn.query('SELECT * FROM producto', (err, productos) => {
+            var Datos = [];
             if (err) {
                 res.json(err);
             }
+            Datos.Alert = []
+            console.log(req.user)
+            if (req.user){
+              Datos.Usuario = {user:true, Nombre: req.user.Nombre,perfil:req.user.Perfil}
+            } else
+              Datos.Usuario = {user:false}
+            console.log(Datos)
+
+            Datos.producto= productos;
             //  console.log(producto)
             res.render('productos', {  // PINTAR EN EL NAVEGADOR 
-                data: productos // LLENAR LOS DATOS DENTRO DE PRODUCTO
+                data: Datos // LLENAR LOS DATOS DENTRO DE PRODUCTO
 
             });
         });

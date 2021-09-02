@@ -4,6 +4,7 @@ Node
 npm init --yes
 
 npm i mysql morgan handlebars express-myconnection express-handlebars express errorhandler ejs @handlebars/allow-prototype-access
+npm i cookie-parser dotenv express-session sweetalert2 jsonwebtoken
 npm i bcryptjs -S
 npm i nodemon -D
 

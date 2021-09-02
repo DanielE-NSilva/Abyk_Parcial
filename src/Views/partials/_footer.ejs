@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,6 +96,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <!-- JS here -->
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<% if (typeof data.Alert.alert != "undefined"){ %>
+    
+    <<%= data.Alert.Script %>>
+            Swal.fire({
+            title: '<%= data.Alert.alertTitle%>',
+            text: '<%= data.Alert.alerMessage%>',
+            icon: '<%= data.Alert.alertIcon%>',
+            showConfirmButton: <%= data.Alert.showConfirmButton %>,
+            timer: <%= data.Alert.time %>
+       }).then(()=> {
+           window.location= '<%=data.Alert.ruta%>'
+        })
+    </<%= data.Alert.Script %>>
+<% } %>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
  <!-- Jquery, Popper, Bootstrap -->
@@ -129,7 +148,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
  <!-- Jquery Plugins, main Jquery -->	
      <script src="../public/assets/js/plugins.js"></script>
      <script src="../public/assets/js/main.js"></script>
-     
-  
 </body>
 </html>

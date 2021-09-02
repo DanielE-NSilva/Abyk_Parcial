@@ -20,17 +20,17 @@
         </tr>
           </thead>
           <tbody>
-            <% if (data) { %>
-              <% for(var i = 0; i < data.length; i++) { %>
+            <% if (data.productos) { %>
+              <% for(var i = 0; i < data.productos.length; i++) { %>
                 <tr>
                   <td><%= (i + 1) %></td>
-                  <td><%= data[i].NombreImagen %></td>
-                  <td><%= data[i].Nombre %></td>
-                  <td><%= data[i].Descripcion %></td>
-                  <td><%= data[i].Caracteristicas %></td>
-                  <td><%= data[i].Referencia %></td>
-                  <td><%= data[i].Cantidad %></td>
-                  <td><%= data[i].Categoria %></td>
+                  <td><%= data.productos[i].NombreImagen %></td>
+                  <td><%= data.productos[i].Nombre %></td>
+                  <td><%= data.productos[i].Descripcion %></td>
+                  <td><%= data.productos[i].Caracteristicas %></td>
+                  <td><%= data.productos[i].Referencia %></td>
+                  <td><%= data.productos[i].Cantidad %></td>
+                  <td><%= data.productos[i].Categoria %></td>
                   <td>
                     <td><a href="/update/<%= data[i].IdProducto %>" class="btn btn-info"> Update<i class="fas fa-edit"></i></i></a>
                     <td><a href="/delete/<%= data[i].IdProducto %>" class="btn btn-danger"> Delete<i class="fas fa-trash-alt"></i></a>
