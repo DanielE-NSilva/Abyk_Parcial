@@ -19,14 +19,29 @@
                             <div class="login_part_form_iner">
                                 <h3>Inicio de sesion</h3>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="Correo" name="Correo" value=""
+                                    <input type="text" class="form-control" id="Correo" name="Correo"
                                         placeholder="Correo" required>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                    <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Contraseña" required>
                                 </div>
-
+                                <center>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6 form-group p_star">
+                                                <label for="admin"> Administrador</label>
+                                                <input type="radio" class="form-control" name="admin"
+                                                    value='Administrador' required>
+                                            </div>
+                                            <div class="col-md-6 form-group p_star">
+                                                <label for="admin"> Cliente</label>
+                                                <input type="radio" class="form-control" name="admin"
+                                                    value="Cliente" required checked>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </center>
                                 <div class="col-md-12 form-group">
                                     <button value="Enviar" class="btn_3">
                                         Ingresar
@@ -37,7 +52,6 @@
                     </div>
                 </div>
         </section>
-
     </form>
     <!--================login_part end =================-->
     <%- include('partials/_footer') -%>

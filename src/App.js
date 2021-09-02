@@ -33,13 +33,8 @@ app.post("/updateImage/add",multer({ dest: './public/uploads/'}).single('img') ,
 // middlewares se ejecuta antes de las peticiones de los usuario
 app.use(morgan('dev'))
 //middlewares para secciones compartidas
-/* 
-app.use(session({
-  secret:'Esto es Secreto',
-  resave: true,
-  saveUninitialized:true
-}))
-*/
+
+
 app.use(myConnection(mysql, {
     host: process.env.DbHost,
     user: process.env.DbUser,

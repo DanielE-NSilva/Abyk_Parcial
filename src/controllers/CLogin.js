@@ -10,23 +10,31 @@ exports.login = (req, respagina) => {
   if (req.user)
     Datos.Usuario = req.user
   else
-    Datos.Usuario = []
+    Datos.Usuario = {user:false}
   console.log(Datos)
   respagina.render('login', { data: Datos });
 };
 
 exports.Logeado = async (reqpagina, respagina) => {
+  var tabla;
+  if(reqpagina.body.admin =='Administrador'){
+    tabla=process.env.administrador
+  }else if(reqpagina.body.admin =='Cliente'){
+    tabla=process.env.cliente
+  }
+  console.log("Tabla despues de if " +tabla)
+
   try {
     var DatosLogin = [reqpagina.body.Correo, reqpagina.body.password];
     reqpagina.getConnection((err, connection) => {
-      const queryUno = connection.query('SELECT persona.Correo, Contraseña, cliente.nombre ' +
-        'FROM persona JOIN cliente ' +
+      const queryUno = connection.query('SELECT persona.Correo, Contraseña, '+tabla+'.nombre ' +
+        'FROM persona JOIN '+tabla+' '+
         'ON persona.Correo=cliente.Correo ' +
         'WHERE persona.Correo = ?', DatosLogin[0], (err, result) => {
           Datos.Alert = {
             alert: true,
             alertTitle: 'Inicio De Seccion ',
-            alerMessage: 'Constraseña o Usuario erronea ',
+            alerMessage: 'CConstraseña, Usuario o Perfil incorrecto ',
             alertIcon: 'error',
             showConfirmButton: false,
             time: 2000,
@@ -36,7 +44,6 @@ exports.Logeado = async (reqpagina, respagina) => {
           if (err) {
             console.log(err)
             respagina.render('login', { data: Datos })
-
           } else {
             if (result.length == 0) {
               respagina.render('login', { data: Datos })
@@ -71,6 +78,7 @@ exports.Logeado = async (reqpagina, respagina) => {
             }
           }
         });
+        console.log(queryUno.sql)
     });
   } catch (error) {
     console.log("Error" + error)
@@ -105,5 +113,17 @@ exports.isAutheticated = async (reqpagina, res, next) => {
 
 exports.logout = (req, res) => {
   res.clearCookie('jwt');
-  res.redirect('/')
+  Datos.Alert = {
+    alert: true,
+    alertTitle: 'Inicio De Seccion ',
+    alerMessage: 'Constraseña, Usuario o Perfil incorrecto ',
+    alertIcon: 'error',
+    showConfirmButton: false,
+    time: 2000,
+    ruta: '/login',
+    Script: 'script'
+  }
+  Datos.Usuario = {user:false}
+  console.log(Datos)
+  respagina.render('login', { data: Datos });
 }
