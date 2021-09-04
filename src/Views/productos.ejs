@@ -1,71 +1,91 @@
 <%- include('partials/_header') -%>
-
-
-<div class="container mt-5">
+  <div class="container mt-5">
     <div class="row">
       <div class="col-md-10">
-        <table class="table table-bordered table-hover">
-          <h2>CRUD PRODUCTOS</h2>
-          <thead>
-            <tr>
+        <% if (data.productos.length >= 1) { %> 
+           <table class="table table-bordered table-hover"> 
+            <h2>CRUD PRODUCTOS</h2> 
+              <thead>
+              <tr>
                 <td>n°</td>
-                <td>NombreImagen</td>
-                <td>Nombre</td>
                 <td>Nombre</td>
                 <td>Descripcion</td>
                 <td>Caracteristicas</td>
                 <td>Referencia</td>
                 <td>Cantidad</td>
-                <td>Categoria</td>
-        </tr>
-          </thead>
-          <tbody>
-            <% if (data.productos) { %>
-              <% for(var i = 0; i < data.productos.length; i++) { %>
+                <td>Categoría</td>
+                <td>Actualizar</td>
+                <td>Eliminar</td>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% for(var i=0; i < data.productos.length; i++) { %>
                 <tr>
-                  <td><%= (i + 1) %></td>
-                  <td><%= data.productos[i].NombreImagen %></td>
-                  <td><%= data.productos[i].Nombre %></td>
-                  <td><%= data.productos[i].Descripcion %></td>
-                  <td><%= data.productos[i].Caracteristicas %></td>
-                  <td><%= data.productos[i].Referencia %></td>
-                  <td><%= data.productos[i].Cantidad %></td>
-                  <td><%= data.productos[i].Categoria %></td>
                   <td>
-                    <td><a href="/update/<%= data[i].IdProducto %>" class="btn btn-info"> Update<i class="fas fa-edit"></i></i></a>
-                    <td><a href="/delete/<%= data[i].IdProducto %>" class="btn btn-danger"> Delete<i class="fas fa-trash-alt"></i></a>
+                    <%= (i + 1) %>
+                  </td>
+                  <td>
+                    <%= data.productos[i].Nombre %>
+                  </td>
+                  <td>
+                    <%= data.productos[i].Descripcion %>
+                  </td>
+                  <td>
+                    <%= data.productos[i].Caracteristicas %>
+                  </td>
+                  <td>
+                    <%= data.productos[i].Referencia %>
+                  </td>
+                  <td>
+                    <%= data.productos[i].Cantidad %>
+                  </td>
+                  <td>
+                    <%= data.productos[i].Categoria %>
+                  </td>
+
+                  <td><a href="/update/<%= data.productos[i].IdProducto %>" style="padding-top: 15px; padding-bottom: 15px; padding-left: 20px; padding-right: 20px; background-color: green;" class="btn "><i
+                        class="fas fa-edit"></i></a>
+                  <td><a href="/delete/<%= data.productos[i].IdProducto %>" style="padding-top: 15px; padding-bottom: 15px; padding-left: 22px; padding-right: 22px; background-color: red;" class="btn "><i
+                        class="fas fa-trash-alt"></i></a>
                   </td>
                 </tr>
-              <% } %>
+                <% } %>
+
+            </tbody>
+          </table>
+          <% } else {%>
+            <h4>   No hay productos en la base de datos</h4>
             <% } %>
-          </tbody>
-        </table>
       </div>
       <div class="col-md-5">
         <div class="card-body">
-  
-          <form action="/add" method="POST" enctype='multipart/form-data'>
-            <div class="form-group">
-              <input type="text" name="name" placeholder="name" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="text" name="descripcion" placeholder="Descripcion" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="text" name="caracteristicas" placeholder="Caracteristicas" class="form-control" autofocus>
-            </div>
-            <div class="form-group">
-              <input type="text" name="referencia" placeholder="Referencia" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="text" name="cantidad" placeholder="Cantidad" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="text" name="categoria" placeholder="Categoria" class="form-control" autofocus>
-            </div>
 
-            <div class="form-group" >
-              <input type="file" name="image"  id="inputGroupFile" >
+          <form action="/add" method="POST" enctype='multipart/form-data' required>
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Nombre" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="descripcion" placeholder="Descripcion" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="caracteristicas" placeholder="Caracteristicas" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="referencia" placeholder="Referencia" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="cantidad" placeholder="Cantidad" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <select name="categoria" id="categoria" class="form-control" required>
+                <option value="">Categorias</option>
+                <option value="1">Femeninos</option>
+                <option value="2">Masculinos</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <input type="file" name="image" id="inputGroupFile" required>
             </div>
             <button type="submit" class="btn btn-primary">
               save Products

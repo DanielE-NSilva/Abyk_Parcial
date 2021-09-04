@@ -5,7 +5,8 @@ const mysql = require('mysql')
 const myConnection = require('express-myconnection')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
-
+const errorHandler = require('errorhandler');
+const multer = require('multer');
 dotenv.config({path:path.join(__dirname,'/env/.env')})
 // Importando rutas
 const customerRoutes = require('./routes/routers')
@@ -25,10 +26,11 @@ app.set('views', path.join(__dirname, 'views'))
 
 // Para utilizar Cookies
 app.use(cookieParser())
-/*
-var multer = require('multer');
-app.post("/updateImage/add",multer({ dest: './public/uploads/'}).single('img') ,contentUpdate.addImage)
-*/
+app.use(
+  multer({ dest: path.join(__dirname, './public/upload/temp') }).single(
+    'image'
+  )
+);
 
 // middlewares se ejecuta antes de las peticiones de los usuario
 app.use(morgan('dev'))
@@ -52,6 +54,10 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 //routes Peticiones posibles -Secciones-
 app.use('/', customerRoutes);
+
+if ('development' === app.get('env')) {
+  app.use(errorHandler());
+}
 
 // Starting the server
 app.listen(app.get("port"), () => {

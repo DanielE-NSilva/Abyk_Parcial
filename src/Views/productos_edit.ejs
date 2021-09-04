@@ -5,27 +5,24 @@
     <div class="row">
       <div class="col-md-5 offset-md-3 card">
         <div class="card-body">
-          <form action="/update/<%= data.IdProducto %>" method="POST" >
+          <form action="/update/<%= data.producto.IdProducto %>" method="POST" >
             <div class="form-group">
-              <input type="text" name="nameproducto" placeholder="NombreProducto" value="<%= data.NombreImagen %>" class="form-control" autofocus>
+              <input type="text" name="name" placeholder="Nombre"  value="<%= data.producto.Nombre %>" class="form-control" readonly >
             </div>
             <div class="form-group">
-              <input type="text" name="name" placeholder="name"  value="<%= data.Nombre %>" class="form-control">
+              <input type="text" name="descripcion" placeholder="Descripcion"  value="<%= data.producto.Descripcion %>" class="form-control" readonly >
             </div>
             <div class="form-group">
-              <input type="text" name="descripcion" placeholder="Descripcion"  value="<%= data.Descripcion %>" class="form-control">
+              <input type="text" name="caracteristicas" placeholder="Caracteristicas" value="<%= data.producto.Caracteristicas %>"   class="form-control" readonly  >
             </div>
             <div class="form-group">
-              <input type="text" name="caracteristicas" placeholder="Caracteristicas" value="<%= data.Caracteristicas %>"   class="form-control" autofocus>
+              <input type="text" name="referencia" placeholder="Referencia" value="<%= data.producto.Referencia %>"  class="form-control" readonly >
             </div>
             <div class="form-group">
-              <input type="text" name="referencia" placeholder="Referencia" value="<%= data.Referencia %>"  class="form-control">
+              <input type="text" name="cantidad" placeholder="Cantidad" value="<%= data.producto.Cantidad %>"  class="form-control" required>
             </div>
             <div class="form-group">
-              <input type="text" name="cantidad" placeholder="Cantidad" value="<%= data.Cantidad %>"  class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="text" name="categoria" placeholder="Categoria" value="<%= data.Categoria %>"  class="form-control" autofocus>
+              <input type="text" name="categoria" placeholder="Categoria" value="<%= data.producto.Categoria %>"  class="form-control"  readonly >
             </div>
             <button type="submit" class="btn btn-primary">
               edit Products
