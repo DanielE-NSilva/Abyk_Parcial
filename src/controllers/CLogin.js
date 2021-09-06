@@ -3,7 +3,9 @@ const { encrypt, compare } = require('../helpers/handleBcrypt')
 const { promisify } = require('util')
 const conexion = require('../Database/db')
 var Datos = [];
+
 //Login
+
 
 exports.login = (req, respagina) => {
   Datos.Alert = []
@@ -22,19 +24,17 @@ exports.Logeado = async (reqpagina, respagina) => {
   }else if(reqpagina.body.admin =='Cliente'){
     tabla=process.env.cliente
   }
-  console.log("Tabla despues de if " +tabla)
-
   try {
     var DatosLogin = [reqpagina.body.Correo, reqpagina.body.password];
     reqpagina.getConnection((err, connection) => {
-      const queryUno = connection.query('SELECT persona.Correo, Contraseña, '+tabla+'.nombre ' +
+      const queryUno = connection.query('SELECT persona.Correo, Perfil, Contraseña, '+tabla+'.nombre ' +
         'FROM persona JOIN '+tabla+' '+
-        'ON persona.Correo=cliente.Correo ' +
+        'ON persona.Correo='+tabla+'.Correo ' +
         'WHERE persona.Correo = ?', DatosLogin[0], (err, result) => {
           Datos.Alert = {
             alert: true,
             alertTitle: 'Inicio De Seccion ',
-            alerMessage: 'CConstraseña, Usuario o Perfil incorrecto ',
+            alerMessage: 'Contraseña, Usuario o Perfil incorrecto ',
             alertIcon: 'error',
             showConfirmButton: false,
             time: 2000,
@@ -52,8 +52,15 @@ exports.Logeado = async (reqpagina, respagina) => {
                 respagina.render('login', { data: Datos })
               } else {
                 const Correo = result[0].Correo;
+                var perfil;
+                if(result[0].Perfil == 0)
+                  perfil = false
+                else
+                  perfil = true
+                console.log("perfil")
+                console.log(perfil)
                 const Nombre = result[0].nombre;
-                const token = jwt.sign({ Correo: Correo },
+                const token = jwt.sign({ Correo:Correo, Perfil:perfil},
                   process.env.JwtSecreto, {
                   expiresIn: process.env.JwtTiempoExpira
                 })
@@ -73,6 +80,7 @@ exports.Logeado = async (reqpagina, respagina) => {
                   ruta: '/',
                   Script: 'script'
                 }
+                Datos.Usuario = {user:false,perfil:false}
                 respagina.render('login', { data: Datos })
               }
             }
@@ -86,22 +94,29 @@ exports.Logeado = async (reqpagina, respagina) => {
 };
 
 exports.isAutheticated = async (reqpagina, res, next) => {
-  console.log
+
   if (reqpagina.cookies.jwt) {
     try {
-      console.log("Antes Deco")
       const decodificada =  await promisify(jwt.verify)(reqpagina.cookies.jwt, process.env.JwtSecreto)
-      console.log(decodificada)
-      conexion.query('SELECT persona.Correo, Contraseña, cliente.nombre ' +
-        'FROM persona JOIN cliente ' +
-        'ON persona.Correo=cliente.Correo ' +
+      var tabla;
+      if(decodificada.Perfil){
+        tabla = process.env.administrador
+      }else {
+        tabla = process.env.cliente
+      }
+      console.log("Decoficacion Lista")
+      console.log(decodificada.perfil)
+      const Q = conexion.query('SELECT persona.Correo Contraseña,'+tabla+'.nombre ' +
+        'FROM persona JOIN '+tabla+' ' +
+        'ON persona.Correo='+tabla+'.Correo ' +
         'WHERE persona.Correo = ?', [decodificada.Correo], (err, result) => {
+          console.log("Result")
+          console.log(result)
           if (!result) { return next() }
-          reqpagina.user = {Nombre:result[0].nombre, Perfil: true}
+          reqpagina.user = {Nombre:result[0].nombre, Perfil: tabla}
           console.log(result[0].nombre)
           return next()
         });
-
     } catch (error) {
       console.log(error)
       return
@@ -111,19 +126,18 @@ exports.isAutheticated = async (reqpagina, res, next) => {
   }
 }
 
-exports.logout = (req, res) => {
-  res.clearCookie('jwt');
+exports.logout = (req, respagina) => {
+  respagina.clearCookie('jwt');
   Datos.Alert = {
     alert: true,
     alertTitle: 'Inicio De Seccion ',
-    alerMessage: 'Constraseña, Usuario o Perfil incorrecto ',
-    alertIcon: 'error',
+    alerMessage: 'Salida de Seccion Correcta ',
+    alertIcon: 'success',
     showConfirmButton: false,
     time: 2000,
     ruta: '/login',
     Script: 'script'
   }
-  Datos.Usuario = {user:false}
-  console.log(Datos)
+  Datos.Usuario = {user:false, perfil:false}
   respagina.render('login', { data: Datos });
 }

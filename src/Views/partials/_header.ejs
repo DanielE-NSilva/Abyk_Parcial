@@ -43,22 +43,26 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li class=""><a href="Catagori.html">Categorias</a>
+                                        <li class=""><a href="">Categorias</a>
                                             <ul class="submenu">
-                                                <li><a href="product_list.html"> Productos Masculino</a></li>
-                                                <li><a href="single-product.html"> Productos Femeninos</a></li>
+                                                <li><a href="/producto/Masculino"> Productos Masculino</a></li>
+                                                <li><a href="/producto/Femenino"> Productos Femeninos</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="Catagori.html">Ofertas</a></li>
-                                        <li><a href="quienesSomos">Quines somos</a></li>
 
-                                        <li><a href="contactos">Contactos</a></li>
-                                        <li class=""><a href="#">Gestionar</a>
-                                            <ul class="submenu">
-                                                <li><a href="\productos"> Productos</a></li>
-                                                <li><a href="single-product.html"> Clientes</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="\quienesSomos">Quines somos</a></li>
+                                        <li><a href="\contactos">Contactos</a></li>
+                                        <% if(data.Usuario.perfil=='administrador' ) { %>
+                                            <li class="submenu"><a href="#">Gestionar</a>
+                                                <ul class="submenu">
+                                                    <li><a href="\productos"> Productos</a></li>
+                                                    <li><a href="\"> Clientes</a></li>
+                                                    <li><a href="\"> Informe Compras</a></li>
+                                                    <li><a href="\"> Añadir Administradores</a></li>
+                                                </ul>
+                                            </li>
+                                            <% } %>
+
                                     </ul>
                                 </nav>
                             </div>
@@ -73,27 +77,24 @@
                                         </div>
                                     </div>
                                 </li>
-
+                                <!--
                                 <li>
                                     <div class="shopping-card">
                                         <a href="carrito"><i class="fas fa-shopping-cart"></i></a>
                                     </div>
-                                </li>
+                                </li>  -->
                                 <li class="d-none d-lg-block">
                                     <% if (data.Usuario.user){%>
-                                        <a href="logout" class="btn header-btn">
-
-                                        <%= data.Usuario.Nombre  %>
-                                        Sign off
-                                    </a>
+                                        <a href="logout" class="btn header-btn">    
+                                            <%= data.Usuario.Nombre %>
+                                            Sign off
+                                        </a>
                                     <% } else { %>
-                                        <a href="login" class="btn header-btn">
-                                        Sign in
-                                    </a>
-                                        <% } %>
-                                       
+                                        <a href="\login" class="btn header-btn">
+                                            Sign in
+                                        </a>
+                                    <% } %>
                                 </li>
-
                             </ul>
                         </div>
                         <!-- Mobile Menu -->

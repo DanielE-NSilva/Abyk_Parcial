@@ -13,13 +13,14 @@ CRegistro.registrandose = async (req, respagina) => {
           Datos.Alert = {
             alert: true,
             alertTitle: 'Registro de Cliente',
-            alerMessage: 'Correo electronico Registrado ',
+            alerMessage: 'Correo electronico Registrado por favor intente nuevamente ',
             alertIcon: 'error',
             showConfirmButton: false,
             time: 5000,
             ruta: '/registrarse',
             Script: 'script'
           }
+          Datos.Usuario = { user: false }
           respagina.render('registrarse', { data: Datos })
         } else {
           connection.query('INSERT INTO cliente(Correo,Nombre,Apellido) value (?,?,?)', DatosRegistroCliente, (err, connection) => {
@@ -36,6 +37,8 @@ CRegistro.registrandose = async (req, respagina) => {
                 ruta: '/login',
                 Script: 'script'
               }
+
+            Datos.Usuario = { user: false }
             respagina.render('registrarse', { data: Datos })
           });
         }

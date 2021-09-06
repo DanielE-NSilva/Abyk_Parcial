@@ -41,15 +41,7 @@ CREATE TABLE producto(
 	Referencia VARCHAR(150) NOT NULL,
     Cantidad INT NOT NULL,
     Categoria TINYINT NOT NULL,
+	Precio INT,
 	PRIMARY KEY (IdProducto),
 	UNIQUE INDEX IdProducto_UNIQUE (IdProducto ASC) VISIBLE
 );
-
-
-
-
-
-<!--
-
-     -->
-  

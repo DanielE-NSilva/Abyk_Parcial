@@ -25,9 +25,10 @@ router.post('/login',Clogin.Logeado);
 router.get('/carrito',Clogin.isAutheticated, Ccarrito.carrito);
 
 //Crud productos
-router.get('/productos',Clogin.isAutheticated, Cproductos.list); //METODO
+router.get('/productos',Clogin.isAutheticated, Cproductos.listproductos);
+router.get('/producto/:Categoria',Clogin.isAutheticated, Cproductos.listproductosBasico);
 router.post('/add',Clogin.isAutheticated, Cproductos.SaveProducto);
-router.get('/delete/:IdProducto',Clogin.isAutheticated, Cproductos.delete); //METODO
+router.get('/delete/:IdProducto',Clogin.isAutheticated, Cproductos.delete);
 
 router.get('/update/:IdProducto',Clogin.isAutheticated, Cproductos.edit);
 router.post('/update/:IdProducto',Clogin.isAutheticated, Cproductos.update);

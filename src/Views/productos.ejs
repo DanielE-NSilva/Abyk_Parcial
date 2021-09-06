@@ -13,6 +13,7 @@
                 <td>Caracteristicas</td>
                 <td>Referencia</td>
                 <td>Cantidad</td>
+                <td>Precio</td>
                 <td>Categoría</td>
                 <td>Actualizar</td>
                 <td>Eliminar</td>
@@ -31,6 +32,7 @@
                   <td>
                     <%= data.productos[i].Descripcion %>
                   </td>
+
                   <td>
                     <%= data.productos[i].Caracteristicas %>
                   </td>
@@ -41,8 +43,17 @@
                     <%= data.productos[i].Cantidad %>
                   </td>
                   <td>
-                    <%= data.productos[i].Categoria %>
+                    <%= data.productos[i].Precio %>
                   </td>
+                  <% if (data.productos[i].Categoria == 1) {%>
+                  <td>
+                    Femenino
+                  </td>
+                  <% } else { %>
+                    <td>
+                      Masculino
+                    </td>
+                  <% } %>
 
                   <td><a href="/update/<%= data.productos[i].IdProducto %>" style="padding-top: 15px; padding-bottom: 15px; padding-left: 20px; padding-right: 20px; background-color: green;" class="btn "><i
                         class="fas fa-edit"></i></a>
@@ -76,6 +87,9 @@
             </div>
             <div class="form-group">
               <input type="text" name="cantidad" placeholder="Cantidad" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="precio" placeholder="Precio" class="form-control" required>
             </div>
             <div class="form-group">
               <select name="categoria" id="categoria" class="form-control" required>
