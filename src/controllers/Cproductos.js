@@ -2,31 +2,58 @@ const Cproductos = {};
 const { randomNumber } = require('../helpers/libs');
 const path = require('path')
 const fs = require('fs-extra');
+const { Console } = require('console');
 var Datos = [];
 
 Cproductos.listproductos = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
-    req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
-        conn.query('SELECT * FROM producto', (err, productos) => {
-            if (err) {
-                res.json(err);
-            }
-            Datos.Alert = []
-            if (req.user) {
-                Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
-            } else
-                Datos.Usuario = { user: false }
-            Datos.productos = productos;
-            res.render('productos', { data: Datos });
-        });
-    });
+    console.log("Aqui estoy")
+    console.log(req.user.Perfil)
+    if (req.user) {
+        Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+    } else
+        Datos.Usuario = { user: false }
+    Datos.productos = []
+    Datos.Alert = {
+        alert: true,
+        alertTitle: 'Administrador Del Sitio    ',
+        alerMessage: 'No eres administrador para entrar a esta pagina',
+        alertIcon: 'error',
+        showConfirmButton: false,
+        time: 4000,
+        ruta: '/',
+        Script: 'script'
+    }
+    if (req.user) {
+        console.log("EXISTO")
+        if (req.user.Perfil == "administrador")
+            req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
+                conn.query('SELECT * FROM producto', (err, productos) => {
+                    if (err) {
+                        res.json(err);
+                    }
+                    Datos.Alert = []
+                    if (req.user) {
+                        Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+                    } else
+                        Datos.Usuario = { user: false }
+                    Datos.productos = productos;
+                    res.render('productos', { data: Datos });
+                });
+            });
+        else
+        res.render('productos', { data: Datos })
+    } else {
+        res.render('productos', { data: Datos })
+    }
 };
 
 Cproductos.listproductosBasico = (req, res) => {
     var Categoria
+    console.log(req.params.Categoria)
     if (req.params.Categoria == 'Femenino')
         Categoria = 1;
     if (req.params.Categoria == 'Masculino')
-        Categoria = 0;
+        Categoria = 2;
 
     console.log(req.params.Categoria)
     req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL

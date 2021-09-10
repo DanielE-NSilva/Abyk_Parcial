@@ -2,9 +2,12 @@
     <div>
         <br>
         <center>
+            
             <h3>Sección <%= data.Categoria %>
             </h3>
         </center>
+        
+
         <div class="row">
             <div class="col-1" ></div>
             <div class="col-10">
@@ -16,7 +19,7 @@
                                 <img style="width: 350px; padding-left: 20px; margin-top: 15px;"
                                     src="../public/image/Mujer/<%= data.productos[i].NombreImagen%>" alt="">
                             <% } %>
-                            <% if(data.productos[i].Categoria==0) { %>
+                            <% if(data.productos[i].Categoria==2) { %>
                                 <img style="width: 350px; padding-left: 20px; margin-top: 15px;"
                                     src="../public/image/Hombre/<%= data.productos[i].NombreImagen%>" alt="">
                             <% } %>

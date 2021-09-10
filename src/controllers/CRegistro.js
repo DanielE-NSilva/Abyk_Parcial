@@ -37,7 +37,6 @@ CRegistro.registrandose = async (req, respagina) => {
                 ruta: '/login',
                 Script: 'script'
               }
-
             Datos.Usuario = { user: false }
             respagina.render('registrarse', { data: Datos })
           });

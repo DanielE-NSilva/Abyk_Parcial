@@ -57,8 +57,10 @@
                                                 <ul class="submenu">
                                                     <li><a href="\productos"> Productos</a></li>
                                                     <li><a href="\"> Clientes</a></li>
-                                                    <li><a href="\"> Informe Compras</a></li>
-                                                    <li><a href="\"> Añadir Administradores</a></li>
+                                                    <% if (false) { %>
+                                                        <li><a href="\"> Informe Compras</a></li>
+                                                        <li><a href="\"> Añadir Administradores</a></li>
+                                                    <% } %>
                                                 </ul>
                                             </li>
                                             <% } %>
@@ -85,7 +87,7 @@
                                 </li>  -->
                                 <li class="d-none d-lg-block">
                                     <% if (data.Usuario.user){%>
-                                        <a href="logout" class="btn header-btn">    
+                                        <a href="\logout" class="btn header-btn">    
                                             <%= data.Usuario.Nombre %>
                                             Sign off
                                         </a>
