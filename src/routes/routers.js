@@ -11,6 +11,7 @@ const CResgistro = require('../controllers/CRegistro');
 router.get('/',Clogin.isAutheticated, CInicio.index);
 router.get('/quienesSomos',Clogin.isAutheticated, CInicio.quienesSomos);
 router.get('/contactos',Clogin.isAutheticated, CInicio.contactos);
+
 //Registrar
 router.get('/registrarse',Clogin.isAutheticated, CInicio.registrarse);
 router.post('/registrarse',Clogin.isAutheticated, CResgistro.registrandose);
@@ -19,7 +20,6 @@ router.post('/registrarse',Clogin.isAutheticated, CResgistro.registrandose);
 router.get('/logout', Clogin.logout); 
 router.get('/login', Clogin.login);
 router.post('/login',Clogin.Logeado);
-
 
 //Esta Logueado
 router.get('/carrito',Clogin.isAutheticated, Ccarrito.carrito);

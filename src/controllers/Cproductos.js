@@ -94,7 +94,7 @@ Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR
                         targetPath = path.resolve(`src/public/image/Mujer/${imgUrl}${ext}`);
                     else
                         targetPath = path.resolve(`src/public/image/Hombre/${imgUrl}${ext}`);
-                    console.log(imageTempPath)
+                        
                     if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
                         await fs.rename(imageTempPath, targetPath);
                         var data = [imgUrl + ext, req.body.name, req.body.descripcion, req.body.caracteristicas, req.body.referencia, req.body.cantidad, req.body.precio, req.body.categoria];

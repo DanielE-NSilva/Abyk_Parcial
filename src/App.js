@@ -7,7 +7,11 @@ const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
 const errorHandler = require('errorhandler');
 const multer = require('multer');
+
+// Seteamos la variables de entorno 
 dotenv.config({path:path.join(__dirname,'/env/.env')})
+
+
 // Importando rutas
 const customerRoutes = require('./routes/routers')
 
@@ -18,14 +22,10 @@ app.set('port', process.env.PORT || 3000)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
-
-
-// Seteamos la variables de entorno 
-//dotenv.config({path:'./env/.env'})
-
-
 // Para utilizar Cookies
 app.use(cookieParser())
+
+//Imagenes temporales
 app.use(
   multer({ dest: path.join(__dirname, './public/upload/temp') }).single(
     'image'
@@ -34,9 +34,8 @@ app.use(
 
 // middlewares se ejecuta antes de las peticiones de los usuario
 app.use(morgan('dev'))
-//middlewares para secciones compartidas
 
-
+// Nueva forma de conexion de mysql
 app.use(myConnection(mysql, {
     host: process.env.DbHost,
     user: process.env.DbUser,
@@ -44,9 +43,9 @@ app.use(myConnection(mysql, {
     port: 3306,
     database: process.env.DbDatabase
 }, 'single'))
-// Nueva forma de conexion de mysql
-//Entender lo que escriban en las vistas
+
 app.use(express.urlencoded({extended: false}))
+//Entender lo que escriban en las vistas
 app.use(express.json())
 
 // El directorio public

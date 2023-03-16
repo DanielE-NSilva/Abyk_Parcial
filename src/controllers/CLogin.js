@@ -5,8 +5,6 @@ const conexion = require('../Database/db')
 var Datos = [];
 
 //Login
-
-
 exports.login = (req, respagina) => {
   Datos.Alert = []
   if (req.user)
@@ -112,11 +110,19 @@ exports.isAutheticated = async (reqpagina, res, next) => {
         'WHERE persona.Correo = ?', [decodificada.Correo], (err, result) => {
           console.log("Result")
           console.log(result)
+          console.log("Error")
+          console.log(err)
+
           if (!result) { return next() }
+          
+          if (result.length == 0) {return next()}
+
+
           reqpagina.user = {Nombre:result[0].nombre, Perfil: tabla}
           console.log(result[0].nombre)
           return next()
         });
+        console.log(Q.sql)
     } catch (error) {
       console.log(error)
       return

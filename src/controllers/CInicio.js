@@ -8,7 +8,7 @@ CInicio.index = (req, res) => {
   Datos.Alert = []
   console.log(req.user)
   if (req.user){
-    Datos.Usuario = {user:true, Nombre: req.user.Nombre,perfil:req.user.Perfil}
+    Datos.Usuario = {user:true, Nombre: req.user.Nombre, perfil:req.user.Perfil}
   } else
     Datos.Usuario = {user:false}
   console.log(Datos)

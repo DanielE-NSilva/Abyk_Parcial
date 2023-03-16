@@ -15,7 +15,7 @@ conexion.connect((err) => {
         console.log('El error de conexion es A ' + err)
         return
     }
-    console.log('Conectado a la base de datos MYsql')
+    console.log('Conectado a la base de datos MYsql Completa')
 })
 
 module.exports = conexion;
