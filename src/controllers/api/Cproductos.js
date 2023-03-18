@@ -1,13 +1,11 @@
 const Cproductos = {};
-const { randomNumber } = require('../helpers/libs');
+const { randomNumber } = require('../../helpers/libs');
 const path = require('path')
 const fs = require('fs-extra');
 const { Console } = require('console');
 var Datos = [];
 
-Cproductos.listproductos = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
-    console.log("Aqui estoy")
-    console.log(req.user.Perfil)
+Cproductos.listproductos = (req, res) => { 
     if (req.user) {
         Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
     } else
@@ -24,9 +22,9 @@ Cproductos.listproductos = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
         Script: 'script'
     }
     if (req.user) {
-        console.log("EXISTO")
+
         if (req.user.Perfil == "administrador")
-            req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
+            req.getConnection((err, conn) => {
                 conn.query('SELECT * FROM producto', (err, productos) => {
                     if (err) {
                         res.json(err);
@@ -49,14 +47,14 @@ Cproductos.listproductos = (req, res) => {  //FUNCION NOMBRE DEL METODO .LIST
 
 Cproductos.listproductosBasico = (req, res) => {
     var Categoria
-    console.log(req.params.Categoria)
+
     if (req.params.Categoria == 'Femenino')
         Categoria = 1;
     if (req.params.Categoria == 'Masculino')
         Categoria = 2;
 
-    console.log(req.params.Categoria)
-    req.getConnection((err, conn) => { // PODER CONECTARSE A MYSQL
+
+    req.getConnection((err, conn) => {
         if (err)
             res.json(err);
         else {
@@ -71,7 +69,6 @@ Cproductos.listproductosBasico = (req, res) => {
                 } else
                     Datos.Usuario = { user: false }
                 Datos.productos = productos;
-                //    console.log(Datos.productos[0].NombreImagen)
                 res.render('Seccion', { data: Datos });
             });
         }
@@ -113,14 +110,15 @@ Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR
                                         ruta: '/productos',
                                         Script: 'script'
                                     }
-                                    console.log(req.user)
+                
                                     if (req.user) {
                                         Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
                                     } else
                                         Datos.Usuario = { user: false }
                                     Datos.productos = []
-                                    console.log(Datos)
-                                    res.render('productos', { data: Datos })
+                           
+                                    
+                                    //res.render('productos', { data: Datos })
                                 }
                             })
                         });
@@ -144,7 +142,7 @@ Cproductos.edit = (req, res) => {
                 Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
             } else
                 Datos.Usuario = { user: false }
-            console.log()
+      
             if (producto[0].Categoria == 1)
                 producto[0].Categoria = "Femenino"
             else
@@ -158,7 +156,7 @@ Cproductos.edit = (req, res) => {
 Cproductos.update = (req, res) => {
     const { IdProducto } = req.params;
     const newCantidad = req.body.cantidad;
-    console.log(IdProducto)
+
     req.getConnection((err, conn) => {
         conn.query('UPDATE abyk.producto set Cantidad = ? where IdProducto = ?', [newCantidad, IdProducto], (err, rows) => {
             if (err) {
@@ -184,13 +182,12 @@ Cproductos.update = (req, res) => {
                     Script: 'script'
                 }
             }
-            console.log(req.user)
             if (req.user) {
                 Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
             } else
                 Datos.Usuario = { user: false }
             Datos.productos = []
-            console.log(Datos)
+   
             res.render('productos', { data: Datos })
         });
     });
@@ -204,7 +201,6 @@ Cproductos.delete = (req, res) => {
                 console.log(err)
             } else {
                 data = rows[0]
-                console.log(data)
 
                 var targetPath
                 if (data.Categoria == 1)

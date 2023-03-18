@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Clogin = require('../controllers/CLogin');
-const CInicio = require('../controllers/CInicio');
-const Ccarrito = require('../controllers/Ccarrito');
-const Cproductos = require('../controllers/Cproductos');
-const CResgistro = require('../controllers/CRegistro');
+const Clogin = require('../controllers/frontend/CLogin');
+const CInicio = require('../controllers/frontend/CInicio');
+const Cproductos = require('../controllers/frontend/Cproductos');
+const CResgistro = require('../controllers/frontend/CRegistro');
 
 //Inicio
 router.get('/',Clogin.isAutheticated, CInicio.index);
@@ -21,15 +20,15 @@ router.get('/logout', Clogin.logout);
 router.get('/login', Clogin.login);
 router.post('/login',Clogin.Logeado);
 
-//Esta Logueado
-router.get('/carrito',Clogin.isAutheticated, Ccarrito.carrito);
-
 //Crud productos
 router.get('/productos',Clogin.isAutheticated, Cproductos.listproductos);
 router.get('/producto/:Categoria',Clogin.isAutheticated, Cproductos.listproductosBasico);
 router.post('/add',Clogin.isAutheticated, Cproductos.SaveProducto);
+
+// delete 
 router.get('/delete/:IdProducto',Clogin.isAutheticated, Cproductos.delete);
 
+// cambiar a put el post 
 router.get('/update/:IdProducto',Clogin.isAutheticated, Cproductos.edit);
 router.post('/update/:IdProducto',Clogin.isAutheticated, Cproductos.update);
 

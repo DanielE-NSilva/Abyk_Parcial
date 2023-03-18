@@ -1,6 +1,6 @@
 const CRegistro = {};
-const { encrypt, compare } = require('../helpers/handleBcrypt')
-const DatosRegisto = require('../helpers/Ddb')
+const { encrypt, compare } = require('../../helpers/handleBcrypt')
+const DatosRegisto = require('../../helpers/Ddb')
 
 CRegistro.registrandose = async (req, respagina) => {
   var Datos = [];

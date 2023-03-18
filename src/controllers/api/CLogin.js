@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
-const { encrypt, compare } = require('../helpers/handleBcrypt')
+const { encrypt, compare } = require('../../helpers/handleBcrypt')
 const { promisify } = require('util')
-const conexion = require('../Database/db')
+const conexion = require('../../Database/db')
 var Datos = [];
 
 //Login
@@ -11,7 +11,6 @@ exports.login = (req, respagina) => {
     Datos.Usuario = req.user
   else
     Datos.Usuario = {user:false}
-  console.log(Datos)
   respagina.render('login', { data: Datos });
 };
 
@@ -55,8 +54,7 @@ exports.Logeado = async (reqpagina, respagina) => {
                   perfil = false
                 else
                   perfil = true
-                console.log("perfil")
-                console.log(perfil)
+
                 const Nombre = result[0].nombre;
                 const token = jwt.sign({ Correo:Correo, Perfil:perfil},
                   process.env.JwtSecreto, {
@@ -84,7 +82,6 @@ exports.Logeado = async (reqpagina, respagina) => {
             }
           }
         });
-        console.log(queryUno.sql)
     });
   } catch (error) {
     console.log("Error" + error)
@@ -102,27 +99,17 @@ exports.isAutheticated = async (reqpagina, res, next) => {
       }else {
         tabla = process.env.cliente
       }
-      console.log("Decoficacion Lista")
-      console.log(decodificada.perfil)
+
       const Q = conexion.query('SELECT persona.Correo Contraseña,'+tabla+'.nombre ' +
         'FROM persona JOIN '+tabla+' ' +
         'ON persona.Correo='+tabla+'.Correo ' +
         'WHERE persona.Correo = ?', [decodificada.Correo], (err, result) => {
-          console.log("Result")
-          console.log(result)
-          console.log("Error")
-          console.log(err)
-
           if (!result) { return next() }
-          
           if (result.length == 0) {return next()}
-
-
           reqpagina.user = {Nombre:result[0].nombre, Perfil: tabla}
-          console.log(result[0].nombre)
+   
           return next()
         });
-        console.log(Q.sql)
     } catch (error) {
       console.log(error)
       return
