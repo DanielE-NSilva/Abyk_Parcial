@@ -45,7 +45,7 @@ Cproductos.listproductos = (req, res) => {
     }
 };
 
-Cproductos.listproductosBasico = (req, res) => {
+Cproductos.listproductosBasicoAPI = (req, res) => {
     var Categoria
 
     if (req.params.Categoria == 'Femenino')
@@ -69,7 +69,9 @@ Cproductos.listproductosBasico = (req, res) => {
                 } else
                     Datos.Usuario = { user: false }
                 Datos.productos = productos;
-                res.render('Seccion', { data: Datos });
+                jsonList = { "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}}
+                res.json(jsonList)
+                //res.render('Seccion', { data: Datos });
             });
         }
     });
@@ -118,7 +120,7 @@ Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR
                                     Datos.productos = []
                            
                                     
-                                    //res.render('productos', { data: Datos })
+                                    res.render('productos', { data: Datos })
                                 }
                             })
                         });

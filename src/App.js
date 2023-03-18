@@ -14,6 +14,7 @@ dotenv.config({path:path.join(__dirname,'/env/.env')})
 
 // Importando rutas
 const customerRoutes = require('./routes/routers')
+const customerRoutesAPI = require('./routes/routersApi')
 
 const app = express()
 
@@ -53,7 +54,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 //routes Peticiones posibles -Secciones-
 app.use('/', customerRoutes);
-
+app.use('/API', customerRoutesAPI);
 if ('development' === app.get('env')) {
   app.use(errorHandler());
 }
