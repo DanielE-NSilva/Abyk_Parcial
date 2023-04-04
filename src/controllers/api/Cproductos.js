@@ -22,7 +22,6 @@ Cproductos.listproductos = (req, res) => {
         Script: 'script'
     }
     if (req.user) {
-
         if (req.user.Perfil == "administrador")
             req.getConnection((err, conn) => {
                 conn.query('SELECT * FROM producto', (err, productos) => {
@@ -35,7 +34,8 @@ Cproductos.listproductos = (req, res) => {
                     } else
                         Datos.Usuario = { user: false }
                     Datos.productos = productos;
-                    res.render('productos', { data: Datos });
+                    jsonList = { "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}}
+                    res.json(jsonList)
                 });
             });
         else
@@ -53,7 +53,6 @@ Cproductos.listproductosBasicoAPI = (req, res) => {
     if (req.params.Categoria == 'Masculino')
         Categoria = 2;
 
-
     req.getConnection((err, conn) => {
         if (err)
             res.json(err);
@@ -64,14 +63,17 @@ Cproductos.listproductosBasicoAPI = (req, res) => {
                 }
                 Datos.Categoria = req.params.Categoria;
                 Datos.Alert = []
-                if (req.user) {
+                if (req.user)
                     Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
-                } else
-                    Datos.Usuario = { user: false }
+                else
+                    Datos.Usuario = { user: false, Nombre: "Anonimo" }
+        
                 Datos.productos = productos;
-                jsonList = { "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}}
+                jsonList = { 
+                    "Usuario" : {"Nombre": Datos.Usuario.Nombre,"Perfil": Datos.Usuario.perfil},
+                    "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}
+                }
                 res.json(jsonList)
-                //res.render('Seccion', { data: Datos });
             });
         }
     });
@@ -118,8 +120,6 @@ Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR
                                     } else
                                         Datos.Usuario = { user: false }
                                     Datos.productos = []
-                           
-                                    
                                     res.render('productos', { data: Datos })
                                 }
                             })

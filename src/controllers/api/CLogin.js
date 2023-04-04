@@ -21,6 +21,10 @@ exports.Logeado = async (reqpagina, respagina) => {
   }else if(reqpagina.body.admin =='Cliente'){
     tabla=process.env.cliente
   }
+  console.log("************************")
+  console.log(reqpagina.body)
+  console.log("************************")
+
   try {
     var DatosLogin = [reqpagina.body.Correo, reqpagina.body.password];
     reqpagina.getConnection((err, connection) => {
@@ -38,12 +42,21 @@ exports.Logeado = async (reqpagina, respagina) => {
             ruta: '/login',
             Script: 'script'
           }
+          let jsonList;
           if (err) {
             console.log(err)
-            respagina.render('login', { data: Datos })
+            jsonList = {
+              "status": 400,
+              "Error": err.sqlMessage
+            } 
+            respagina.json(jsonList)
           } else {
             if (result.length == 0) {
-              respagina.render('login', { data: Datos })
+              jsonList = {
+                "status": 200,
+                "Error": "Usuario o contraseña erronea"
+              } 
+              respagina.json(jsonList)
             } else {
               if (!compare(reqpagina.body.password, result[0].Contraseña)) {
                 respagina.render('login', { data: Datos })
@@ -76,7 +89,7 @@ exports.Logeado = async (reqpagina, respagina) => {
                   ruta: '/',
                   Script: 'script'
                 }
-                Datos.Usuario = {user:false,perfil:false}
+                Datos.Usuario = {user:false, perfil:false}
                 respagina.render('login', { data: Datos })
               }
             }
@@ -86,6 +99,8 @@ exports.Logeado = async (reqpagina, respagina) => {
   } catch (error) {
     console.log("Error" + error)
   }
+
+
 };
 
 exports.isAutheticated = async (reqpagina, res, next) => {

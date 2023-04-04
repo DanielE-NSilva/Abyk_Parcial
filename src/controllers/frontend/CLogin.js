@@ -27,7 +27,7 @@ exports.Logeado = async (reqpagina, respagina) => {
       const queryUno = connection.query('SELECT persona.Correo, Perfil, Contraseña, '+tabla+'.nombre ' +
         'FROM persona JOIN '+tabla+' '+
         'ON persona.Correo='+tabla+'.Correo ' +
-        'WHERE persona.Correo = ?', DatosLogin[0], (err, result) => {
+        'WHERE persona.Correo = ?', DatosLogin[0], async (err, result) => {
           Datos.Alert = {
             alert: true,
             alertTitle: 'Inicio De Seccion ',
@@ -45,7 +45,7 @@ exports.Logeado = async (reqpagina, respagina) => {
             if (result.length == 0) {
               respagina.render('login', { data: Datos })
             } else {
-              if (!compare(reqpagina.body.password, result[0].Contraseña)) {
+              if ( !(await compare(reqpagina.body.password, result[0].Contraseña))) {
                 respagina.render('login', { data: Datos })
               } else {
                 const Correo = result[0].Correo;
@@ -89,7 +89,6 @@ exports.Logeado = async (reqpagina, respagina) => {
 };
 
 exports.isAutheticated = async (reqpagina, res, next) => {
-
   if (reqpagina.cookies.jwt) {
     try {
       const decodificada =  await promisify(jwt.verify)(reqpagina.cookies.jwt, process.env.JwtSecreto)

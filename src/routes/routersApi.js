@@ -18,7 +18,7 @@ router.post('/registrarse',Clogin.isAutheticated, CResgistro.registrandose);
 //Login EN MANTENIMIENTO
 router.get('/logout', Clogin.logout); 
 router.get('/login', Clogin.login);
-router.post('/login',Clogin.Logeado);
+router.post('/login', Clogin.Logeado);
 
 //Crud productos
 router.get('/productos',Clogin.isAutheticated, Cproductos.listproductos);
