@@ -15,8 +15,8 @@ router.get('/contactos',Clogin.isAutheticated, CInicio.contactos);
 router.get('/registrarse',Clogin.isAutheticated, CInicio.registrarse);
 router.post('/registrarse',Clogin.isAutheticated, CResgistro.registrandose);
 
-//Login EN MANTENIMIENTO
-router.get('/logout', Clogin.logout); 
+//Login
+router.get('/logout', Clogin.logout);
 router.get('/login', Clogin.login);
 router.post('/login',Clogin.Logeado);
 

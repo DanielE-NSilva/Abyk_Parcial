@@ -21,6 +21,11 @@ Cproductos.listproductos = (req, res) => {
         ruta: '/',
         Script: 'script'
     }
+    jsonList = {
+        "status": 200,
+        "mensaje": 'No eres administrador para entrar a esta pagina'
+    }
+
     if (req.user) {
         if (req.user.Perfil == "administrador")
             req.getConnection((err, conn) => {
@@ -39,9 +44,9 @@ Cproductos.listproductos = (req, res) => {
                 });
             });
         else
-        res.render('productos', { data: Datos })
+            res.json(jsonList)
     } else {
-        res.render('productos', { data: Datos })
+        res.json(jsonList)
     }
 };
 
@@ -203,7 +208,6 @@ Cproductos.delete = (req, res) => {
                 console.log(err)
             } else {
                 data = rows[0]
-
                 var targetPath
                 if (data.Categoria == 1)
                     targetPath = path.resolve(`src/public/image/Mujer/${data.NombreImagen}`);
@@ -212,27 +216,15 @@ Cproductos.delete = (req, res) => {
 
                 connection.query('DELETE FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
                     if (err) {
-                        Datos.Alert = {
-                            alert: true,
-                            alertTitle: 'Gestion de Producto',
-                            alerMessage: 'Producto NO Eliminado',
-                            alertIcon: 'error',
-                            showConfirmButton: false,
-                            time: 4000,
-                            ruta: '/productos',
-                            Script: 'script'
+                        jsonList = {
+                            "status": 200,
+                            "mensaje": "Error al eliminar"
                         }
                     } else {
                         fs.unlink(targetPath)
-                        Datos.Alert = {
-                            alert: true,
-                            alertTitle: 'Gestion de Producto',
-                            alerMessage: 'Producto Eliminado Correctamente',
-                            alertIcon: 'success',
-                            showConfirmButton: false,
-                            time: 4000,
-                            ruta: '/productos',
-                            Script: 'script'
+                        jsonList = {
+                            "status": 200,
+                            "mensaje": "Eliminado Correctamente"
                         }
                     }
                     if (req.user) {

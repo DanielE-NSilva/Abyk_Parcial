@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../public/assets/css/style.css">
     <link rel="stylesheet" href="../public/css/Dany.css">
     <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    
 </head>
 
 <body>
@@ -34,7 +34,7 @@
                         <!-- Logo -->
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
                             <div class="logo">
-                                <a href="/"><img src="../public/image/Logo/logocirculo.png" alt=""
+                                <a href="/"><img src="../../public/image/Logo/logocirculo.png" alt=""
                                         style="width: 120%"></a>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li class=""><a href="">Categorias</a>
+                                        <li class=""><a>Categorias</a>
                                             <ul class="submenu">
                                                 <li><a href="/producto/Masculino"> Productos Masculino</a></li>
                                                 <li><a href="/producto/Femenino"> Productos Femeninos</a></li>
@@ -53,11 +53,11 @@
                                         <li><a href="\quienesSomos">Quines somos</a></li>
                                         <li><a href="\contactos">Contactos</a></li>
                                         <% if(data.Usuario.perfil=='administrador' ) { %>
-                                            <li class="submenu"><a href="#">Gestionar</a>
+                                            <li class="submenu"><a>Gestionar</a>
                                                 <ul class="submenu">
                                                     <li><a href="\productos"> Productos</a></li>
-                                                    <li><a href="\"> Clientes</a></li>
                                                     <% if (false) { %>
+                                                        <li><a href="\"> Clientes</a></li>
                                                         <li><a href="\"> Informe Compras</a></li>
                                                         <li><a href="\"> Añadir Administradores</a></li>
                                                     <% } %>

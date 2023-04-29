@@ -88,10 +88,10 @@ exports.Logeado = async (reqpagina, respagina) => {
   }
 };
 
-exports.isAutheticated = async (reqpagina, res, next) => {
+exports.isAutheticated = async (reqpagina, resPagina, next) => {
   if (reqpagina.cookies.jwt) {
     try {
-      const decodificada =  await promisify(jwt.verify)(reqpagina.cookies.jwt, process.env.JwtSecreto)
+      const decodificada =  jwt.verify(reqpagina.cookies.jwt, process.env.JwtSecreto)
       var tabla;
       if(decodificada.Perfil){
         tabla = process.env.administrador

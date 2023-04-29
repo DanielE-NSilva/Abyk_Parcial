@@ -26,7 +26,7 @@ router.get('/producto/:Categoria',Clogin.isAutheticated, Cproductos.listproducto
 router.post('/add',Clogin.isAutheticated, Cproductos.SaveProducto);
 
 // delete 
-router.get('/delete/:IdProducto',Clogin.isAutheticated, Cproductos.delete);
+router.delete('/delete/:IdProducto',Clogin.isAutheticated, Cproductos.delete);
 
 // cambiar a put el post 
 router.get('/update/:IdProducto',Clogin.isAutheticated, Cproductos.edit);
