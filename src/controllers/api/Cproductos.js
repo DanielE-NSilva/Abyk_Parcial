@@ -5,16 +5,16 @@ const fs = require('fs-extra');
 const { Console } = require('console');
 var Datos = [];
 
-Cproductos.listproductos = (req, res) => { 
-    if (req.user) {
-        Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+Cproductos.listproductos = (reqPagina, resPagina) => { 
+    if (reqPagina.user) {
+        Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
     } else
         Datos.Usuario = { user: false }
     Datos.productos = []
     Datos.Alert = {
         alert: true,
         alertTitle: 'Administrador Del Sitio    ',
-        alerMessage: 'No eres administrador para entrar a esta pagina',
+        alerMessage: 'No eresPagina administrador para entrar a esta pagina',
         alertIcon: 'error',
         showConfirmButton: false,
         time: 4000,
@@ -23,53 +23,53 @@ Cproductos.listproductos = (req, res) => {
     }
     jsonList = {
         "status": 200,
-        "mensaje": 'No eres administrador para entrar a esta pagina'
+        "mensaje": 'No eresPagina administrador para entrar a esta pagina'
     }
 
-    if (req.user) {
-        if (req.user.Perfil == "administrador")
-            req.getConnection((err, conn) => {
+    if (reqPagina.user) {
+        if (reqPagina.user.Perfil == "administrador")
+            reqPagina.getConnection((err, conn) => {
                 conn.query('SELECT * FROM producto', (err, productos) => {
                     if (err) {
-                        res.json(err);
+                        resPagina.json(err);
                     }
                     Datos.Alert = []
-                    if (req.user) {
-                        Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+                    if (reqPagina.user) {
+                        Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                     } else
                         Datos.Usuario = { user: false }
                     Datos.productos = productos;
                     jsonList = { "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}}
-                    res.json(jsonList)
+                    resPagina.json(jsonList)
                 });
             });
         else
-            res.json(jsonList)
+            resPagina.json(jsonList)
     } else {
-        res.json(jsonList)
+        resPagina.json(jsonList)
     }
 };
 
-Cproductos.listproductosBasicoAPI = (req, res) => {
+Cproductos.listproductosBasicoAPI = (reqPagina, resPagina) => {
     var Categoria
 
-    if (req.params.Categoria == 'Femenino')
+    if (reqPagina.params.Categoria == 'Femenino')
         Categoria = 1;
-    if (req.params.Categoria == 'Masculino')
+    if (reqPagina.params.Categoria == 'Masculino')
         Categoria = 2;
 
-    req.getConnection((err, conn) => {
+    reqPagina.getConnection((err, conn) => {
         if (err)
-            res.json(err);
+            resPagina.json(err);
         else {
             conn.query('SELECT * FROM producto WHERE Categoria = ?', Categoria, (err, productos) => {
                 if (err) {
-                    res.json(err);
+                    resPagina.json(err);
                 }
-                Datos.Categoria = req.params.Categoria;
+                Datos.Categoria = reqPagina.params.Categoria;
                 Datos.Alert = []
-                if (req.user)
-                    Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+                if (reqPagina.user)
+                    Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                 else
                     Datos.Usuario = { user: false, Nombre: "Anonimo" }
         
@@ -78,33 +78,33 @@ Cproductos.listproductosBasicoAPI = (req, res) => {
                     "Usuario" : {"Nombre": Datos.Usuario.Nombre,"Perfil": Datos.Usuario.perfil},
                     "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}
                 }
-                res.json(jsonList)
+                resPagina.json(jsonList)
             });
         }
     });
 }
 
-Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR 
+Cproductos.SaveProducto = async (reqPagina, resPagina) => { //FUNCION PRA SALVAR 
     const saveImage = async () => {
         const imgUrl = randomNumber();
-        await req.getConnection((err, connection) => {
+        await reqPagina.getConnection((err, connection) => {
             connection.query('SELECT * FROM  producto WHERE nombreImagen = ? ', imgUrl, async (err, producto) => {
                 if (producto.length >= 1)
                     saveImage()
                 else {
-                    const imageTempPath = req.file.path;
-                    const ext = path.extname(req.file.originalname).toLowerCase();
+                    const imageTempPath = reqPagina.file.path;
+                    const ext = path.extname(reqPagina.file.originalname).toLowerCase();
                     // 1 es categoria de mujer
                     var targetPath
-                    if (req.body.categoria == 1)
+                    if (reqPagina.body.categoria == 1)
                         targetPath = path.resolve(`src/public/image/Mujer/${imgUrl}${ext}`);
                     else
                         targetPath = path.resolve(`src/public/image/Hombre/${imgUrl}${ext}`);
                         
                     if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
                         await fs.rename(imageTempPath, targetPath);
-                        var data = [imgUrl + ext, req.body.name, req.body.descripcion, req.body.caracteristicas, req.body.referencia, req.body.cantidad, req.body.precio, req.body.categoria];
-                        req.getConnection((err, connection) => {
+                        var data = [imgUrl + ext, reqPagina.body.nombre, reqPagina.body.descripcion, reqPagina.body.caracteristicas, reqPagina.body.referencia, reqPagina.body.cantidad, reqPagina.body.precio, reqPagina.body.categoria];
+                        reqPagina.getConnection((err, connection) => {
                             connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,precio,categoria) value (?,?,?,?,?,?,?,?)', data, (err, producto) => {
                                 if (err)
                                     console.log(err)
@@ -120,18 +120,18 @@ Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR
                                         Script: 'script'
                                     }
                 
-                                    if (req.user) {
-                                        Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+                                    if (reqPagina.user) {
+                                        Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                                     } else
                                         Datos.Usuario = { user: false }
                                     Datos.productos = []
-                                    res.render('productos', { data: Datos })
+                                    resPagina.render('productos', { data: Datos })
                                 }
                             })
                         });
                     } else {
                         fs.unlink(imageTempPath);
-                        res.status(500).json({ error: "solo imagenes estan permitidas" })
+                        resPagina.status(500).json({ error: "solo imagenes estan permitidas" })
                     }
                 }
             })
@@ -140,69 +140,66 @@ Cproductos.SaveProducto = async (req, res) => { //FUNCION PRA SALVAR
     saveImage();
 };
 
-Cproductos.edit = (req, res) => {
-    const { IdProducto } = req.params;
-    req.getConnection((err, conn) => {
+Cproductos.edit = (reqPagina, resPagina) => {
+    const { IdProducto } = reqPagina.params;
+    reqPagina.getConnection((err, conn) => {
         conn.query('SELECT * FROM producto WHERE IdProducto = ?', [IdProducto], (err, producto) => {
             Datos.Alert = []
-            if (req.user) {
-                Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
-            } else
-                Datos.Usuario = { user: false }
-      
-            if (producto[0].Categoria == 1)
-                producto[0].Categoria = "Femenino"
-            else
-                producto[0].Categoria = "Masculino"
-            Datos.producto = producto[0]
-            res.render('productos_edit', { data: Datos })
+            if (producto.length == 1){
+                if (reqPagina.user) {
+                    Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
+                } else
+                    Datos.Usuario = { user: false }
+        
+                if (producto[0].Categoria == 1)
+                    producto[0].Categoria = "Femenino"
+                else
+                    producto[0].Categoria = "Masculino"
+                Datos.producto = producto[0]
+            }else{
+                producto = ["No existe producto buscado"]
+            }
+            jsonList = {
+                "status": 200,
+                "Datos":  producto[0]
+              }
+            resPagina.json(jsonList)
         });
     });
 };
 
-Cproductos.update = (req, res) => {
-    const { IdProducto } = req.params;
-    const newCantidad = req.body.cantidad;
+Cproductos.update = (reqPagina, resPagina) => {
+    const { IdProducto } = reqPagina.params;
+    const newCantidad = reqPagina.body.cantidad;
+    const newPrecio = reqPagina.body.precio;
 
-    req.getConnection((err, conn) => {
-        conn.query('UPDATE abyk.producto set Cantidad = ? where IdProducto = ?', [newCantidad, IdProducto], (err, rows) => {
+    reqPagina.getConnection((err, conn) => {
+        conn.query('UPDATE abyk.producto set Cantidad = ?, Precio = ? where IdProducto = ?', [newCantidad,newPrecio, IdProducto], (err, rows) => {
             if (err) {
-                Datos.Alert = {
-                    alert: true,
-                    alertTitle: 'Gestion de Producto',
-                    alerMessage: 'Producto No Actualizado',
-                    alertIcon: 'error;',
-                    showConfirmButton: false,
-                    time: 4000,
-                    ruta: '/productos',
-                    Script: 'script'
-                }
+                jsonList = {
+                    "status": 200,
+                    "Datos":  'Producto No Actualizado'
+                    }
             } else {
-                Datos.Alert = {
-                    alert: true,
-                    alertTitle: 'Gestion de Producto',
-                    alerMessage: 'Producto Actualizado Correctamente',
-                    alertIcon: 'success',
-                    showConfirmButton: false,
-                    time: 4000,
-                    ruta: '/productos',
-                    Script: 'script'
-                }
+                jsonList = {
+                    "status": 200,
+                    "Datos":  'Producto Actualizado Correctamente'
+                  }
             }
-            if (req.user) {
-                Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+            if (reqPagina.user) {
+                Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
             } else
                 Datos.Usuario = { user: false }
             Datos.productos = []
    
-            res.render('productos', { data: Datos })
+            resPagina.json(jsonList)
         });
     });
 };
 
-Cproductos.delete = (req, res) => {
-    const { IdProducto } = req.params;
-    req.getConnection((err, connection) => {
+Cproductos.delete = (reqPagina, resPagina) => {
+    const { IdProducto } = reqPagina.params;
+    reqPagina.getConnection((err, connection) => {
         const query = connection.query('SELECT NombreImagen,Categoria FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
             if (err) {
                 console.log(err)
@@ -227,12 +224,12 @@ Cproductos.delete = (req, res) => {
                             "mensaje": "Eliminado Correctamente"
                         }
                     }
-                    if (req.user) {
-                        Datos.Usuario = { user: true, Nombre: req.user.Nombre, perfil: req.user.Perfil }
+                    if (reqPagina.user) {
+                        Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                     } else
                         Datos.Usuario = { user: false }
                     Datos.productos = []
-                    res.render('productos', { data: Datos })
+                    resPagina.json(jsonList)
                 });
             }
         });

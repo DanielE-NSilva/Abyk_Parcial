@@ -5,16 +5,16 @@ const conexion = require('../../Database/db')
 var Datos = [];
 
 //Login
-exports.login = (reqPagina, respagina) => {
+exports.login = (reqPagina, resPagina) => {
   Datos.Alert = []
   if (req.user)
     Datos.Usuario = req.user
   else
     Datos.Usuario = { user: false }
-  respagina.render('login', { data: Datos });
+  resPagina.render('login', { data: Datos });
 };
 
-exports.Logeado = async (reqpagina, respagina) => {
+exports.Logeado = async (reqpagina, resPagina) => {
   var tabla;
   if (reqpagina.body.admin == 'Administrador') {
     tabla = process.env.administrador
@@ -34,21 +34,21 @@ exports.Logeado = async (reqpagina, respagina) => {
               "status": 400,
               "Error": err.sqlMessage
             }
-            respagina.json(jsonList)
+            resPagina.json(jsonList)
           } else {
             if (result.length == 0) {
               jsonList = {
                 "status": 200,
                 "mensaje": "Usuario o contraseña incorrectos"
               }
-              respagina.json(jsonList)
+              resPagina.json(jsonList)
             } else {
               if (!(await compare(reqpagina.body.password, result[0].Contraseña))) {
                 jsonList = {
                   "status": 200,
                   "mensaje": "Usuario o contraseña incorrectos"
                 }
-                respagina.json(jsonList)
+                resPagina.json(jsonList)
               } else {
                 const Correo = result[0].Correo;
                 var perfil;
@@ -67,14 +67,14 @@ exports.Logeado = async (reqpagina, respagina) => {
                   expires: new Date(Date.now() + process.env.JwtCookieExpires * 24 * 60 * 60 * 1000),
                   httpOnly: true
                 }
-                respagina.cookie('jwt', token, cookiesOptions);
+                resPagina.cookie('jwt', token, cookiesOptions);
                 jsonList = {
                   "status": 200,
                   "mensaje": "Bienvenido " + Nombre,
                   "cookies": { name: "jwt", "token": token, "cookiesOptions": cookiesOptions }
                 }
 
-                respagina.json(jsonList)
+                resPagina.json(jsonList)
               }
             }
           }
@@ -85,7 +85,7 @@ exports.Logeado = async (reqpagina, respagina) => {
       "status": 400,
       "Error": error
     }
-    respagina.json(jsonList)
+    resPagina.json(jsonList)
   }
 };
 
@@ -117,11 +117,11 @@ exports.isAutheticated = async (reqpagina, resPagina, next) => {
   }
 }
 
-exports.logout = (reqPagina, respagina) => {
-  respagina.clearCookie('jwt');
+exports.logout = (reqPagina, resPagina) => {
+  resPagina.clearCookie('jwt');
   jsonList = {
     "status": 200,
     "mensaje": "Salida correcta"
   }
-  respagina.json(jsonList);
+  resPagina.json(jsonList);
 }

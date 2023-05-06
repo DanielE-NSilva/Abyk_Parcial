@@ -2,43 +2,34 @@ const CRegistro = {};
 const { encrypt, compare } = require('../../helpers/handleBcrypt')
 const DatosRegisto = require('../../helpers/Ddb')
 
-CRegistro.registrandose = async (req, respagina) => {
+CRegistro.registrandose = async (reqPagina, resPagina) => {
   var Datos = [];
-  if (req.body.password == req.body.Confirmpassword) {
-    var DatosRegistroPersona = [req.body.Correo, await encrypt(req.body.password)]
-    var DatosRegistroCliente = [req.body.Correo, req.body.Nombre, req.body.Apellido];
-    req.getConnection((err, connection) => {
+  if (reqPagina.body.password == reqPagina.body.Confirmpassword) {
+    var DatosRegistroPersona = [reqPagina.body.Correo, await encrypt(reqPagina.body.password)]
+    var DatosRegistroCliente = [reqPagina.body.Correo, reqPagina.body.Nombre, reqPagina.body.Apellido];
+    reqPagina.getConnection((err, connection) => {
       connection.query('INSERT INTO persona(Correo,Contraseña) value (?,?)', DatosRegistroPersona, (err, res) => {
         if (err) {
-          Datos.Alert = {
-            alert: true,
-            alertTitle: 'Registro de Cliente',
-            alerMessage: 'Correo electronico Registrado por favor intente nuevamente ',
-            alertIcon: 'error',
-            showConfirmButton: false,
-            time: 5000,
-            ruta: '/registrarse',
-            Script: 'script'
-          }
           Datos.Usuario = { user: false }
-          respagina.render('registrarse', { data: Datos })
+          jsonList = {
+            "status": 200,
+            "mensaje": "Error I" + err
+          }
+          resPagina.json(jsonList);
         } else {
           connection.query('INSERT INTO cliente(Correo,Nombre,Apellido) value (?,?,?)', DatosRegistroCliente, (err, connection) => {
-            if (err)
-              console.error(err)
-            else
-              Datos.Alert = {
-                alert: true,
-                alertTitle: 'Registro de Cliente',
-                alerMessage: 'Satisfactorio Registro',
-                alertIcon: 'success',
-                showConfirmButton: false,
-                time: 5000,
-                ruta: '/login',
-                Script: 'script'
+            if (err) {
+              jsonList = {
+                "status": 200,
+                "mensaje": "Error II " + err
               }
-            Datos.Usuario = { user: false }
-            respagina.render('registrarse', { data: Datos })
+              resPagina.json(jsonList);
+            } else
+              jsonList = {
+                "status": 200,
+                "mensaje": "Usuario Registrado correctamente"
+              }
+            resPagina.json(jsonList);
           });
         }
       });

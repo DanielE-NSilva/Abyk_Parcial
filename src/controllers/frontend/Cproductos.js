@@ -156,9 +156,10 @@ Cproductos.edit = (req, res) => {
 Cproductos.update = (req, res) => {
     const { IdProducto } = req.params;
     const newCantidad = req.body.cantidad;
+    const newPrecio = req.body.precio;
 
     req.getConnection((err, conn) => {
-        conn.query('UPDATE abyk.producto set Cantidad = ? where IdProducto = ?', [newCantidad, IdProducto], (err, rows) => {
+        conn.query('UPDATE abyk.producto set Cantidad = ?, Precio = ? where IdProducto = ?', [newCantidad,newPrecio, IdProducto], (err, rows) => {
             if (err) {
                 Datos.Alert = {
                     alert: true,

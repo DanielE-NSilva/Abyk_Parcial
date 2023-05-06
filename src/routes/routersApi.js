@@ -6,7 +6,7 @@ const CInicio = require('../controllers/API/CInicio');
 const Cproductos = require('../controllers/API/Cproductos');
 const CResgistro = require('../controllers/API/CRegistro');
 
-//Inicio
+//Inicio FALTA
 router.get('/',Clogin.isAutheticated, CInicio.index);
 router.get('/quienesSomos',Clogin.isAutheticated, CInicio.quienesSomos);
 router.get('/contactos',Clogin.isAutheticated, CInicio.contactos);
@@ -28,8 +28,7 @@ router.post('/add',Clogin.isAutheticated, Cproductos.SaveProducto);
 // delete 
 router.delete('/delete/:IdProducto',Clogin.isAutheticated, Cproductos.delete);
 
-// cambiar a put el post 
 router.get('/update/:IdProducto',Clogin.isAutheticated, Cproductos.edit);
-router.post('/update/:IdProducto',Clogin.isAutheticated, Cproductos.update);
+router.put('/update/:IdProducto',Clogin.isAutheticated, Cproductos.update);
 
 module.exports = router;
