@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 const { Console } = require('console');
 var Datos = [];
 
-Cproductos.listproductos = (reqPagina, resPagina) => { 
+Cproductos.listproductos = (reqPagina, resPagina) => {
     if (reqPagina.user) {
         Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
     } else
@@ -39,7 +39,7 @@ Cproductos.listproductos = (reqPagina, resPagina) => {
                     } else
                         Datos.Usuario = { user: false }
                     Datos.productos = productos;
-                    jsonList = { "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}}
+                    jsonList = { "Datos:": { "Categoria": Datos.Categoria, "Productos": [Datos.productos] } }
                     resPagina.json(jsonList)
                 });
             });
@@ -72,11 +72,11 @@ Cproductos.listproductosBasicoAPI = (reqPagina, resPagina) => {
                     Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                 else
                     Datos.Usuario = { user: false, Nombre: "Anonimo" }
-        
+
                 Datos.productos = productos;
-                jsonList = { 
-                    "Usuario" : {"Nombre": Datos.Usuario.Nombre,"Perfil": Datos.Usuario.perfil},
-                    "Datos:" :{"Categoria" : Datos.Categoria, "Productos": [Datos.productos]}
+                jsonList = {
+                    "Usuario": { "Nombre": Datos.Usuario.Nombre, "Perfil": Datos.Usuario.perfil },
+                    "Datos:": { "Categoria": Datos.Categoria, "Productos": [Datos.productos] }
                 }
                 resPagina.json(jsonList)
             });
@@ -85,6 +85,8 @@ Cproductos.listproductosBasicoAPI = (reqPagina, resPagina) => {
 }
 
 Cproductos.SaveProducto = async (reqPagina, resPagina) => { //FUNCION PRA SALVAR 
+    console.log("************Entro save************")
+
     const saveImage = async () => {
         const imgUrl = randomNumber();
         await reqPagina.getConnection((err, connection) => {
@@ -100,32 +102,28 @@ Cproductos.SaveProducto = async (reqPagina, resPagina) => { //FUNCION PRA SALVAR
                         targetPath = path.resolve(`src/public/image/Mujer/${imgUrl}${ext}`);
                     else
                         targetPath = path.resolve(`src/public/image/Hombre/${imgUrl}${ext}`);
-                        
+
                     if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
                         await fs.rename(imageTempPath, targetPath);
                         var data = [imgUrl + ext, reqPagina.body.nombre, reqPagina.body.descripcion, reqPagina.body.caracteristicas, reqPagina.body.referencia, reqPagina.body.cantidad, reqPagina.body.precio, reqPagina.body.categoria];
                         reqPagina.getConnection((err, connection) => {
                             connection.query('INSERT INTO producto (nombreImagen,nombre,descripcion,caracteristicas,referencia,cantidad,precio,categoria) value (?,?,?,?,?,?,?,?)', data, (err, producto) => {
-                                if (err)
-                                    console.log(err)
-                                else {
-                                    Datos.Alert = {
-                                        alert: true,
-                                        alertTitle: 'Gestion de Producto',
-                                        alerMessage: 'Producto Creado Correctamente',
-                                        alertIcon: 'success',
-                                        showConfirmButton: false,
-                                        time: 4000,
-                                        ruta: '/productos',
-                                        Script: 'script'
+                                if (err) {
+                                    jsonList = {
+                                        "status": 200,
+                                        "Datos": "Error"+err
                                     }
-                
+                                } else {
+                                    jsonList = {
+                                        "status": 200,
+                                        "Datos": 'Producto Creado Correctamente'
+                                    }
+
                                     if (reqPagina.user) {
                                         Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                                     } else
                                         Datos.Usuario = { user: false }
-                                    Datos.productos = []
-                                    resPagina.render('productos', { data: Datos })
+                                    resPagina.json(jsonList)
                                 }
                             })
                         });
@@ -145,24 +143,24 @@ Cproductos.edit = (reqPagina, resPagina) => {
     reqPagina.getConnection((err, conn) => {
         conn.query('SELECT * FROM producto WHERE IdProducto = ?', [IdProducto], (err, producto) => {
             Datos.Alert = []
-            if (producto.length == 1){
+            if (producto.length == 1) {
                 if (reqPagina.user) {
                     Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                 } else
                     Datos.Usuario = { user: false }
-        
+
                 if (producto[0].Categoria == 1)
                     producto[0].Categoria = "Femenino"
                 else
                     producto[0].Categoria = "Masculino"
                 Datos.producto = producto[0]
-            }else{
+            } else {
                 producto = ["No existe producto buscado"]
             }
             jsonList = {
                 "status": 200,
-                "Datos":  producto[0]
-              }
+                "Datos": producto[0]
+            }
             resPagina.json(jsonList)
         });
     });
@@ -174,24 +172,24 @@ Cproductos.update = (reqPagina, resPagina) => {
     const newPrecio = reqPagina.body.precio;
 
     reqPagina.getConnection((err, conn) => {
-        conn.query('UPDATE abyk.producto set Cantidad = ?, Precio = ? where IdProducto = ?', [newCantidad,newPrecio, IdProducto], (err, rows) => {
+        conn.query('UPDATE abyk.producto set Cantidad = ?, Precio = ? where IdProducto = ?', [newCantidad, newPrecio, IdProducto], (err, rows) => {
             if (err) {
                 jsonList = {
                     "status": 200,
-                    "Datos":  'Producto No Actualizado'
-                    }
+                    "Datos": 'Producto No Actualizado'
+                }
             } else {
                 jsonList = {
                     "status": 200,
-                    "Datos":  'Producto Actualizado Correctamente'
-                  }
+                    "Datos": 'Producto Actualizado Correctamente'
+                }
             }
             if (reqPagina.user) {
                 Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
             } else
                 Datos.Usuario = { user: false }
             Datos.productos = []
-   
+
             resPagina.json(jsonList)
         });
     });
