@@ -41,7 +41,7 @@ app.use(myConnection(mysql, {
     host: process.env.DbHost,
     user: process.env.DbUser,
     password: process.env.DbPassword,
-    port: 3306,
+    port: process.env.Dbport,
     database: process.env.DbDatabase
 }, 'single'))
 
@@ -62,4 +62,5 @@ if ('development' === app.get('env')) {
 // Starting the server
 app.listen(app.get("port"), () => {
   console.log("Server on port", app.get("port"));
+  console.log(process.env.DbHost)
 });

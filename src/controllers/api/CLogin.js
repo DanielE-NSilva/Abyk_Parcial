@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken')
 const { encrypt, compare } = require('../../helpers/handleBcrypt')
 const { promisify } = require('util')
 const conexion = require('../../Database/db')
+
+
 var Datos = [];
 
 //Login

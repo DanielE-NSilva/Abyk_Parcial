@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Clogin = require('../controllers/API/CLogin');
-const CInicio = require('../controllers/API/CInicio');
-const Cproductos = require('../controllers/API/Cproductos');
-const CResgistro = require('../controllers/API/CRegistro');
+const Clogin = require('../controllers/api/CLogin.js');
+const CInicio = require('../controllers/api/CInicio.js');
+const Cproductos = require('../controllers/api/Cproductos.js');
+const CResgistro = require('../controllers/api/CRegistro.js');
 
 //Inicio FALTA
 router.get('/',Clogin.isAutheticated, CInicio.index);

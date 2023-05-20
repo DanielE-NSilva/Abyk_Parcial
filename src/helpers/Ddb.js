@@ -1,8 +1,8 @@
 const Datosbd = {};
 
-Datosbd.DbHost = 'localhost'
-Datosbd.DbUser = 'root'
-Datosbd.DbPassword = 'NoloseCualquiercosa'
-Datosbd.Dbport = 3306
-Datosbd.DbDatabase = 'abyk' 
+Datosbd.DbHost = process.env.DbHost
+Datosbd.DbUser = process.env.DbUser
+Datosbd.DbPassword = process.env.DbPassword
+Datosbd.Dbport = process.env.Dbport
+Datosbd.DbDatabase = 'Abyk' 
 module.exports = Datosbd;

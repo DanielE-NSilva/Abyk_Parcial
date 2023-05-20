@@ -1,0 +1,47 @@
+version: '3.1'
+
+networks:
+  myred:
+    driver: bridge
+
+services:
+
+  db:
+    platform: linux/amd64
+    image: mysql:8.0.22
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ./src/Database/BasededatosMySql.sql:/docker-entrypoint-initdb.d/BasededatosMySql.sql
+    networks:
+      - myred
+  app:
+    build:
+      context: .
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - DbHost=db
+      - Dbport=3306
+      - DbPassword=example
+      - DbUser=root
+    depends_on:
+      - db
+    networks:
+      - myred
+    
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - myred

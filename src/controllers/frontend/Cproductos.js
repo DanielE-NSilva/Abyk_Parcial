@@ -69,7 +69,7 @@ Cproductos.listproductosBasico = (req, res) => {
                 } else
                     Datos.Usuario = { user: false }
                 Datos.productos = productos;
-                res.render('Seccion', { data: Datos });
+                res.render('seccion', { data: Datos });
             });
         }
     });

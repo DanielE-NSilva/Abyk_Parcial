@@ -1,4 +1,21 @@
+# Archivos y carpetas generadas por npm
+node_modules/
+package-lock.json
 
-src/App.js
-src/public/assets/css/style.css
-src/App.js
+# Archivos y carpetas generadas por yarn
+yarn.lock
+
+# Archivo de configuración local
+.env
+
+# Archivos y carpetas generadas por IDEs y editores de texto
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+
+# Archivos de registro
+logs/
+*.log
+
+# Otros archivos y carpetas que deseas ignorar

@@ -1,11 +1,11 @@
-DROP DATABASE abyk;
+#DROP DATABASE abyk;
 
 CREATE DATABASE Abyk;
-USE abyk;
+USE Abyk;
 
 CREATE TABLE persona(
   Correo VARCHAR(45) NOT NULL,
-  Contraseña VARCHAR(65) NOT NULL,
+  Contrasena VARCHAR(65) NOT NULL,
   Perfil TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (Correo),
   UNIQUE INDEX Correo_UNIQUE (Correo ASC) VISIBLE
@@ -45,3 +45,9 @@ CREATE TABLE producto(
 	PRIMARY KEY (IdProducto),
 	UNIQUE INDEX IdProducto_UNIQUE (IdProducto ASC) VISIBLE
 );
+
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'example';
+#GRANT ALL PRIVILEGES ON *.* TO 'sqluser'@'%';
+FLUSH PRIVILEGES;
+
+
