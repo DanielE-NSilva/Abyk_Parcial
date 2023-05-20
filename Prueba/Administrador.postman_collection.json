@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "817b4bae-ae25-4f89-b690-e13dcb0eaee0",
+		"name": "Administrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13345649"
+	},
+	"item": [
+		{
+			"name": "Producto-Masculino",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/producto/Masculino",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"producto",
+						"Masculino"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto-Femenino",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/producto/Femenino",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"producto",
+						"Femenino"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logeando Adm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Correo",
+							"value": "DanielNuñez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "DanielNuñez",
+							"type": "text"
+						},
+						{
+							"key": "admin",
+							"value": "Administrador",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/API/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar un producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cantidad",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "35000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/API/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto Espeficico",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:3000/API/delete/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"delete",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Gorra",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "Gorra negra",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "color negro material algodon",
+							"type": "text"
+						},
+						{
+							"key": "referencia",
+							"value": "GN",
+							"type": "text"
+						},
+						{
+							"key": "cantidad",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "17500",
+							"type": "text"
+						},
+						{
+							"key": "categoria",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/Nuñez Silva/Pictures/Captura.PNG"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/API/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

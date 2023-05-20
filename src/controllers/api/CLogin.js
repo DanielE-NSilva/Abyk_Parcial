@@ -34,21 +34,21 @@ exports.Logeado = async (reqpagina, resPagina) => {
               "status": 400,
               "Error": err.sqlMessage
             }
-            resPagina.json(jsonList)
+            resPagina.status(400).json(jsonList)
           } else {
             if (result.length == 0) {
               jsonList = {
-                "status": 200,
+                "status": 403,
                 "mensaje": "Usuario o contraseña incorrectos"
               }
-              resPagina.json(jsonList)
+              resPagina.status(403).json(jsonList)
             } else {
               if (!(await compare(reqpagina.body.password, result[0].Contraseña))) {
                 jsonList = {
                   "status": 200,
                   "mensaje": "Usuario o contraseña incorrectos"
                 }
-                resPagina.json(jsonList)
+                resPagina.status(200).json(jsonList)
               } else {
                 const Correo = result[0].Correo;
                 var perfil;
@@ -74,7 +74,7 @@ exports.Logeado = async (reqpagina, resPagina) => {
                   "cookies": { name: "jwt", "token": token, "cookiesOptions": cookiesOptions }
                 }
 
-                resPagina.json(jsonList)
+                resPagina.status(200).json(jsonList)
               }
             }
           }
@@ -85,7 +85,7 @@ exports.Logeado = async (reqpagina, resPagina) => {
       "status": 400,
       "Error": error
     }
-    resPagina.json(jsonList)
+    resPagina.status(400).json(jsonList)
   }
 };
 
@@ -121,7 +121,7 @@ exports.logout = (reqPagina, resPagina) => {
   resPagina.clearCookie('jwt');
   jsonList = {
     "status": 200,
-    "mensaje": "Salida correcta"
+    "mensaje": "Salida Correcta"
   }
-  resPagina.json(jsonList);
+  resPagina.status(200).json(jsonList);
 }

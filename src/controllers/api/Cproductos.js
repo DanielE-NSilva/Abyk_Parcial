@@ -31,7 +31,11 @@ Cproductos.listproductos = (reqPagina, resPagina) => {
             reqPagina.getConnection((err, conn) => {
                 conn.query('SELECT * FROM producto', (err, productos) => {
                     if (err) {
-                        resPagina.json(err);
+                        jsonList = {
+                            "status": 400,
+                            "mensaje": err
+                        }
+                        resPagina.status(400).json(jsonList);
                     }
                     Datos.Alert = []
                     if (reqPagina.user) {
@@ -40,13 +44,13 @@ Cproductos.listproductos = (reqPagina, resPagina) => {
                         Datos.Usuario = { user: false }
                     Datos.productos = productos;
                     jsonList = { "Datos:": { "Categoria": Datos.Categoria, "Productos": [Datos.productos] } }
-                    resPagina.json(jsonList)
+                    resPagina.status(200).json(jsonList)
                 });
             });
         else
-            resPagina.json(jsonList)
+            resPagina.status(403).json(jsonList)
     } else {
-        resPagina.json(jsonList)
+        resPagina.status(403).json(jsonList)
     }
 };
 
@@ -60,11 +64,11 @@ Cproductos.listproductosBasicoAPI = (reqPagina, resPagina) => {
 
     reqPagina.getConnection((err, conn) => {
         if (err)
-            resPagina.json(err);
+            resPagina.status(503).json(err);
         else {
             conn.query('SELECT * FROM producto WHERE Categoria = ?', Categoria, (err, productos) => {
                 if (err) {
-                    resPagina.json(err);
+                    resPagina.status(200).json(err);
                 }
                 Datos.Categoria = reqPagina.params.Categoria;
                 Datos.Alert = []
@@ -78,15 +82,13 @@ Cproductos.listproductosBasicoAPI = (reqPagina, resPagina) => {
                     "Usuario": { "Nombre": Datos.Usuario.Nombre, "Perfil": Datos.Usuario.perfil },
                     "Datos:": { "Categoria": Datos.Categoria, "Productos": [Datos.productos] }
                 }
-                resPagina.json(jsonList)
+                resPagina.status(200).json(jsonList)
             });
         }
     });
 }
 
 Cproductos.SaveProducto = async (reqPagina, resPagina) => { //FUNCION PRA SALVAR 
-    console.log("************Entro save************")
-
     const saveImage = async () => {
         const imgUrl = randomNumber();
         await reqPagina.getConnection((err, connection) => {
@@ -123,13 +125,13 @@ Cproductos.SaveProducto = async (reqPagina, resPagina) => { //FUNCION PRA SALVAR
                                         Datos.Usuario = { user: true, Nombre: reqPagina.user.Nombre, perfil: reqPagina.user.Perfil }
                                     } else
                                         Datos.Usuario = { user: false }
-                                    resPagina.json(jsonList)
+                                    resPagina.status(201).json(jsonList)
                                 }
                             })
                         });
                     } else {
                         fs.unlink(imageTempPath);
-                        resPagina.status(500).json({ error: "solo imagenes estan permitidas" })
+                        resPagina.status(500).json({ error: "Solo imagenes estan permitidas" })
                     }
                 }
             })
@@ -161,7 +163,7 @@ Cproductos.edit = (reqPagina, resPagina) => {
                 "status": 200,
                 "Datos": producto[0]
             }
-            resPagina.json(jsonList)
+            resPagina.status(200).json(jsonList)
         });
     });
 };
@@ -175,9 +177,10 @@ Cproductos.update = (reqPagina, resPagina) => {
         conn.query('UPDATE abyk.producto set Cantidad = ?, Precio = ? where IdProducto = ?', [newCantidad, newPrecio, IdProducto], (err, rows) => {
             if (err) {
                 jsonList = {
-                    "status": 200,
+                    "status": 400,
                     "Datos": 'Producto No Actualizado'
                 }
+                resPagina.status(400).json(jsonList)
             } else {
                 jsonList = {
                     "status": 200,
@@ -190,7 +193,7 @@ Cproductos.update = (reqPagina, resPagina) => {
                 Datos.Usuario = { user: false }
             Datos.productos = []
 
-            resPagina.json(jsonList)
+            resPagina.status(200).json(jsonList)
         });
     });
 };
@@ -212,9 +215,10 @@ Cproductos.delete = (reqPagina, resPagina) => {
                 connection.query('DELETE FROM producto WHERE IdProducto  = ?', [IdProducto], (err, rows) => {
                     if (err) {
                         jsonList = {
-                            "status": 200,
+                            "status": 400,
                             "mensaje": "Error al eliminar"
                         }
+                        resPagina.status(400).json(jsonList)
                     } else {
                         fs.unlink(targetPath)
                         jsonList = {
@@ -227,7 +231,7 @@ Cproductos.delete = (reqPagina, resPagina) => {
                     } else
                         Datos.Usuario = { user: false }
                     Datos.productos = []
-                    resPagina.json(jsonList)
+                    resPagina.status(200).json(jsonList)
                 });
             }
         });

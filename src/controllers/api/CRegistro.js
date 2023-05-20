@@ -12,24 +12,25 @@ CRegistro.registrandose = async (reqPagina, resPagina) => {
         if (err) {
           Datos.Usuario = { user: false }
           jsonList = {
-            "status": 200,
+            "status": 400,
             "mensaje": "Error I" + err
           }
-          resPagina.json(jsonList);
+          resPagina.status(400).json(jsonList);
         } else {
           connection.query('INSERT INTO cliente(Correo,Nombre,Apellido) value (?,?,?)', DatosRegistroCliente, (err, connection) => {
             if (err) {
               jsonList = {
-                "status": 200,
+                "status": 400,
                 "mensaje": "Error II " + err
               }
-              resPagina.json(jsonList);
+              resPagina.status(400).json(jsonList);
             } else
               jsonList = {
-                "status": 200,
+                "status": 201,
                 "mensaje": "Usuario Registrado correctamente"
               }
-            resPagina.json(jsonList);
+            
+            resPagina.status(201).json(jsonList);
           });
         }
       });
