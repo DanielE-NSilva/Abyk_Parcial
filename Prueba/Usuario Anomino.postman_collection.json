@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "5315ac23-a828-47fb-b8b8-0f098cae5cc5",
+		"name": "Usuario Anomino",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13345649"
+	},
+	"item": [
+		{
+			"name": "Producto-Masculino",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/producto/Masculino",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"producto",
+						"Masculino"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto-Femenino",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/producto/Femenino",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"producto",
+						"Femenino"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrandose",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Nombre",
+							"value": "AndresS",
+							"type": "text"
+						},
+						{
+							"key": "Apellido",
+							"value": "GomezS",
+							"type": "text"
+						},
+						{
+							"key": "Correo",
+							"value": "AndresGomezSss@gmail.comss",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456789*ABC",
+							"type": "text"
+						},
+						{
+							"key": "Confirmpassword",
+							"value": "123456789*ABC",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/API/registrarse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"registrarse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

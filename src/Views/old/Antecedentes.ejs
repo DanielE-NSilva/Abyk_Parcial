@@ -1,0 +1,209 @@
+<%- include('partials/_header') -%>
+
+    <div class="card-body" style="padding: 0;">
+        <form action="/antecedentes/Guardar" method="POST">
+            <span class="login100-form-title">
+                Antecedentes ¿Ha tenido alguno de los siguientes antecedentes?
+            </span>
+            <!-- Pintar los datos desde el controlador dejandolos invisibles-->
+            <div style="display: none;">
+                <input type="text" value="<%= data.NroDocumento %>" name="NroDocumento">
+                <input type="text" value="<%= data.EmailEstudiante %>" name="email" >
+                <input type="text" value="<%= data.TipoDeUsuario %>" name="TipoDeUsuario">
+            </div>
+
+            <div class="row" name="2 preguntas">
+
+                <div class="col-md-5" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input class="input101" type="text" id="pregunta1" readonly="true" value="Diabetes">
+                        </div>
+                        <div class="col-md-2" style="padding: 0; padding-top: 12px;">
+                            <label><input type="radio" value="Si" id="Diabetes" name="Diabetes" required />Si</label>
+                        </div>
+                        <div class="col-md-2" style="padding: 0; padding-top: 12px;">
+                            <label><input type="radio" value="No" id="Diabetes" name="Diabetes" required />No</label><br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input class="input101" type="text" id="pregunta1" readonly="true" value="Tabaquismo">
+                        </div>
+                        <div class="col-md-2" style="padding: 0; padding-top: 12px;">
+                            <label><input type="radio" value="Si" id="" name="Tabaquismo" required />Si</label>
+                        </div>
+                        <div class="col-md-2" style="padding: 0; padding-top: 12px;">
+                            <label><input type="radio" value="No" id="" name="Tabaquismo"  required />No</label><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="col-md-11" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input class="input101" type="text" id="pregunta1" readonly="true"
+                                value="Malnutrición (obesidad o desnutrición)">
+                        </div>
+                        <div class="row col-md-4">
+                            <div class="col-md-4" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="Si" id="" name="Malnutricion" required />Si</label>
+                            </div>
+                            <div class="col-md-4" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="No" id="" name="Malnutricion"  required />No</label><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="col-md-11" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input class="input101" type="text" id="pregunta1" readonly="true"
+                                value="Enfermedades pulmonares crónica (EPOC/Asma)">
+                        </div>
+                        <div class="row col-md-3">
+                            <div class="col-md-6" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="Si" id="" name="EnfermedadesPulmonares" required />Si</label>
+                            </div>
+                            <div class="col-md-6" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="No" id=""
+                                        name="EnfermedadesPulmonares"  required />No</label><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="col-md-11" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input class="input101" type="text" id="pregunta1" readonly="true"
+                                value="Enfermedades renales(riñon) o hepáticas(hígado)">
+                        </div>
+                        <div class="row col-md-3">
+                            <div class="col-md-6" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="Si" id=""
+                                        name="EnfermedadesRenalesHepaticas" required />Si</label>
+                            </div>
+                            <div class="col-md-6" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="No" id=""
+                                        name="EnfermedadesRenalesHepaticas"  required />No</label><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-9" style="padding-bottom: 10px;">
+                        <textarea class="textareaD" disabled name=""
+                            id=""> Enfermedades autoinmunes,inmunosupresión,toma medicamentos inmunosupresores,cáncer o VIH  </textarea>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 5%;">
+                        <label><input type="radio" value="Si" id="" name="EnfermedadesAutoimunes" required />Si</label>
+                        <label><input type="radio" value="No" id="" name="EnfermedadesAutoimunes"  required />No</label><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-9" style="padding-bottom: 10px;">
+                        <textarea class="textareaD" disabled name=""
+                            id=""> Convive con Personas que trabajan en prestación asistencial en salud </textarea>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 5%;">
+                        <label><input type="radio" value="Si" id="" name="ConviveAsistencaSalud" required />Si</label>
+                        <label><input type="radio" value="No" id="" name="ConviveAsistencaSalud"  required />No</label><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="row" style="padding-bottom: 0px;">
+                    <div class="col-md-9" style="padding-bottom: 10px;">
+                        <input class="input101" disabled name=""
+                            id="" value="Convive con personas mayores de 70 años"> </input>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 15px;">
+                        <label><input type="radio" value="Si" id="" name="ConvivePersonaMayor" required />Si</label>
+                        <label><input type="radio" value="No" id="" name="ConvivePersonaMayor"  required />No</label><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-9" style="padding-bottom: 10px;">
+                        <textarea class="textareaD" disabled name=""
+                            id=""> Si lleva tratamiento médico por los antecedentes de salud, marque Si, de lo contrario marque No </textarea>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 5%;">
+                        <label><input type="radio" value="Si" id="" name="TratamientoXAntecedentes" required />Si</label>
+                        <label><input type="radio" value="No" id="" name="TratamientoXAntecedentes"  required />No</label><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-9" style="padding-bottom: 10px;">
+                        <textarea class="textareaD" disabled name=""
+                            id=""> Hipertensión arterial  o enfermedad cardio -vascular,infartos,enfermedad cerebrovascular </textarea>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 5%;">
+                        <label><input type="radio" value="Si" id="" name="EnfermedadesCardiacas" required />Si</label>
+                        <label><input type="radio" value="No" id="" name="EnfermedadesCardiacas"  required />No</label><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" name="1 preguntas">
+                <div class="col-md-10" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="input101" type="text" id="pregunta1" readonly="true"
+                                value="Embarazo actualmente">
+                        </div>
+                        <div class="row col-md-4">
+                            <div class="col-md-4" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="Si" id="" name="EmbarazoA" required />Si</label>
+                            </div>
+                            <div class="col-md-4" style="padding: 0; padding-top: 12px;">
+                                <label><input type="radio" value="No" id="" name="EmbarazoA"  required />No</label><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="checkbox" id="btn-modal">
+            <label for="btn-modal" class="lbl-modal">Abrir modal</label>
+            <div class="modalV">
+                <div class="contenedor">
+                    <header>Bienvenido</header>
+                    <label for="btn-modal">X</label>
+                    <div class="contenido">
+                        <p>  Registro Exitoso!</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <button class="login100-form-btn container-login100-form-btn" >
+                <i class="fas fa-save"></i> Guardar antecedentes
+            </button>
+            
+        </form>
+    </div>
+    <%- include('partials/_footer') -%>

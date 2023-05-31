@@ -1,0 +1,27 @@
+<%- include('partials/_header') -%>
+
+  <form action="/update/<%= data.Id %>" method="POST" name= "Hola">
+    <div style="display: none;">
+      <input type="text" name="NroDocumento" value="<%= data.NroDocumento%>" placeholder="Parentesco" class="form-control"
+      autofocus>
+    </div>
+
+
+    <input type="text" name="parentesco" value="<%= data.parentesco%>" placeholder="Parentesco" class="form-control"
+      autofocus>
+
+    <input type="text" name="Nombre" value="<%= data.Nombre%>" placeholder="Name" class="form-control" autofocus>
+
+    <input type="text" name="fechaNacimiento" value="<%= data.fechaNacimiento%>" placeholder="Fecha de nacimiento"
+      class="form-control">
+
+    <input type="text" name="Genero" value="<%= data.Genero%>" placeholder="Genero" class="form-control">
+    <div class="form-group" id="registrarB">
+      <button class="login100-form-btn container-login100-form-btn" id="btn-registrar">
+        <i class="fa fa-check-circle"></i> Registrar
+      </button>
+    </div>
+  </form>
+
+
+  <%- include('partials/_footer') -%>

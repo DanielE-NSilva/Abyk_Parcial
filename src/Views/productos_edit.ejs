@@ -1,0 +1,85 @@
+<%- include('partials/_header') -%>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 card">
+        <div class="card-body">
+          <form action="/update/<%= data.producto.IdProducto %>" method="POST">
+            <center>
+              <h3>Producto a editar</h3>
+            </center>
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="nombre">Nombre</label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="nombre" placeholder="Nombre" value="<%= data.producto.Nombre %>"
+                  class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="Descripcion">Descripción</label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="Descripcion" placeholder="Descripcion" value="<%= data.producto.Descripcion %>"
+                  class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="caracteristicas">Caracteristicas</label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="caracteristicas" placeholder="Caracteristicas"
+                  value="<%= data.producto.Caracteristicas %>" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="Referencia">Referencia </label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="referencia" placeholder="Referencia" value="<%= data.producto.Referencia %>"
+                  class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="Cantidad">Cantidad </label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="cantidad" placeholder="Cantidad" value="<%= data.producto.Cantidad %>"
+                  class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="Precio">Precio </label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="precio" placeholder="Cantidad" value="<%= data.producto.Precio %>"
+                  class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-3" style="margin-top: 10px;">
+                <label for="Categoria">Categoria </label>
+              </div>
+              <div class="col-9">
+                <input type="text" name="categoria" placeholder="Categoria" value="<%= data.producto.Categoria %>"
+                  class="form-control" readonly>
+              </div>
+            </div>
+            <center>
+              <button type="submit" class="btn btn-primary">
+                edit Products
+              </button>
+            </center>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('partials/_footer') -%>

@@ -1,0 +1,47 @@
+<%- include('partials/_header') -%>
+    <div>
+        <br>
+        <center>
+            
+            <h3>Sección <%= data.Categoria %>
+            </h3>
+        </center>
+        
+
+        <div class="row">
+            <div class="col-1" ></div>
+            <div class="col-10">
+                <div class="row">
+
+                    <% for(var i=0; i < data.productos.length; i++) { %>
+                        <div class="col-4" style="border: 1px solid; margin-bottom: 15px;">
+                            <% if(data.productos[i].Categoria==1) { %>
+                                <img style="width: 350px; padding-left: 20px; margin-top: 15px;"
+                                    src="../public/image/Mujer/<%= data.productos[i].NombreImagen%>" alt="">
+                            <% } %>
+                            <% if(data.productos[i].Categoria==2) { %>
+                                <img style="width: 350px; padding-left: 20px; margin-top: 15px;"
+                                    src="../public/image/Hombre/<%= data.productos[i].NombreImagen%>" alt="">
+                            <% } %>
+                            <center>
+                                <div>
+                                    <h4> <%=data.productos[i].Nombre %>
+                                    </h4>
+                                    <h4>$<%=data.productos[i].Precio %>
+                                    </h4>
+                                    <% if(data.Usuario.user) {%>
+                                        <button value="Agregar" class="btn">Agregar</button>
+                                        <br>
+                                    <% } %>
+                                    <br>
+                                </div>
+                            </center>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-1" ></div>
+        </div>
+    </div>
+
+    <%- include('partials/_footer') -%>

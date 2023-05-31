@@ -1,0 +1,86 @@
+<%- include('partials/_header') -%>
+
+    <div class="card-body">
+        <form action="/pasaporte/Guardar" method="POST">
+            <span class="login100-form-title">
+                ¿Ha tenido síntomas en los últimos 2 días ?
+            </span>
+            <div style="display: none;">
+                <input type="text" value="<%= data.NroDocumento %>" name="NroDocumento">
+                <input type="text" value="<%= data.EmailEstudiante %>" name="" >
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <input class="input101" type="text" id="pregunta1" readonly="readonly" value="Tos">
+                    <label><input type="radio" value="Si" id="" name="Tos"required />Si</label>
+                    <label><input type="radio" value="No" id="" name="Tos"required />No</label><br />
+                </div>
+                <div class="col-md-7">
+                    <input class="input101" type="text" id="pregunta6" readonly="readonly" value="Dolor de garganta">
+
+                    <label><input type="radio" value="Si" id="" name="DolorGarganta" required/>Si</label>
+                    <label><input type="radio" value="No" id="" name="DolorGarganta"required />No</label><br />
+                </div>
+                <div class="col-md-6">
+
+                    <input class="input101" type="text" id="pregunta10" readonly="readonly"
+                        value="Fiebre cuantificada mayor a 38°C">
+                    <label><input type="radio" value="Si" id="" name="Fiebre" required/>Si</label>
+                    <label><input type="radio" value="No" id="" name="Fiebre"required />No</label><br />
+                </div>
+
+                <div class="col-md-6">
+
+                    <input class="input101" type="text" id="pregunta1" readonly="readonly"
+                        value="Secreción nasal /moco o flema">
+                    <label><input type="radio" value="Si" id="" name="SecrecionNasal" required />Si</label>
+                    <label><input type="radio" value="No" id="" name="SecrecionNasal" required />No</label><br />
+
+                </div>
+
+                <div class="col-md-8">
+                    <input class="input101" type="text" id="pregunta3" readonly="readonly"
+                        value="Malestar general,escalofrío o dolor muscular">
+
+                    <label><input type="radio" value="Si" id="" name="MalestarGeneral"required />Si</label>
+                    <label><input type="radio" value="No" id="" name="MalestarGeneral"required />No</label><br />
+                </div>
+
+                <div class="col-md-4">
+                    <input class="input101" type="text" id="pregunta4" readonly="readonly" value="Diarrea">
+                    <label><input type="radio" value="Si" id="" name="Diarrea"required />Si</label>
+                    <label><input type="radio" value="No" id="" name="Diarrea"required />No</label><br />
+                </div>
+                <div>
+
+                    <input class="input101" type="text" id="pregunta4" readonly="readonly"
+                        value="Disminución de percepción de olores y sabores">
+
+                    <label><input type="radio" value="Si" id="" name="DisminucionSentidos" required/>Si</label>
+                    <label><input type="radio" value="No" id="" name="DisminucionSentidos" required />No</label><br />
+                </div>
+                <div class="col-md-6">
+
+                    <input class="input101" type="text" id="pregunta4" readonly="readonly" value="DTabaquismo">
+                    
+                    <label><input type="radio" value="Si" id="" name="DTabaquismo" required/>Si</label>
+                    <label><input type="radio" value="No" id="" name="DTabaquismo"required />No</label><br />
+                </div>
+                <div class="col-md-6">
+
+                    <input class="input101" type="text" id="pregunta4" readonly="readonly"
+                        value="Dificultad respiratoria">
+
+                    <label><input type="radio" value="Si" id="" name="DificultadRespiratoria"required/>Si</label>
+                    <label><input type="radio" value="No" id="" name="DificultadRespiratoria"required />No</label><br />
+                </div>
+
+                <button type="submit" class="btn bg-success" style="border-radius: 25px; margin-top: 14px;width: 30%;">
+                    save customer
+                </button>
+        </form>
+    </div>
+    <%- include('partials/_footer') -%>
